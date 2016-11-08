@@ -1,0 +1,740 @@
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	
+	margin: 0; 
+	padding: 0;
+}
+
+hr {
+	margin-bottom: 5px;
+	border-top: solid 1px lightgray;
+}
+
+table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: separate;
+	border-spacing: 2px;
+	border: solid 1px lightgray;
+	margin: 0 10px 10px 0;
+}
+
+th {
+	padding: 0 10px;
+}
+
+td {
+	padding: 0 10px;
+	position: relative;
+}
+
+td div {
+	position: static;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+label {
+	display: inline-block;
+	width: 140px;
+	margin: 0;
+}
+
+textarea,
+select,
+input {
+	margin: 0 10px 10px 0;
+}
+
+input {
+	padding: 0 5px;
+}
+
+.hidden {
+	display: none;
+}
+
+.content {
+	position: relative;
+	padding: 20px;
+	width: 100%;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.content img {
+	border: none;
+}
+
+.status {
+	font-size: 18px;
+	line-height: 25px;
+}
+
+.pre {
+	font-size: 16px;
+	white-space: pre;
+}
+
+.right {
+	float: right;
+}
+
+.back {
+	float: left;
+	margin-top: 10px;
+}
+
+.refresh {
+	float: right;
+	margin-top: 10px;
+}
+
+.back  img,
+.refresh  img {
+	margin: 5px;
+}
+
+.maximize {
+	float: right;
+	text-decoration: none;
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background: url('/images/maximize.png') no-repeat;
+	margin: 8px;
+}
+
+.toolbar {
+	display: block;
+	line-height: 5px;
+	font-size: 1px;
+	text-align: justify;
+	-moz-text-align-last: justify;
+    text-align-last: justify;
+}
+
+.toolbar span {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background-color: gray;
+	background-repeat: no-repeat;
+}
+
+.toolbar a:hover span {
+	background-color: green;
+}
+
+.toolbar .profile  {
+	background-image: url('/images/profile-50i.png');
+}
+
+.toolbar .network  {
+	background-image: url('/images/network-50i.png');
+}
+
+.toolbar .wifi-scan  {
+	background-image: url('/images/wifi-search-50i.png');
+}
+
+.toolbar .config {
+	background-image: url('/images/config-50i.png');
+}
+
+.toolbar .devices-list {
+	background-image: url('/images/devices-50i.png');
+}
+
+.toolbar .properties {
+	background-image: url('/images/properties-50i.png');
+}
+
+.toolbar .actions {
+	background-image: url('/images/action-50i.png');
+}
+
+.toolbar .filters {
+	background-image: url('/images/filter-50i.png');
+}
+
+.toolbar .triggers {
+	background-image: url('/images/trigger-50i.png');
+}
+
+.menu {
+	position: relative;
+	float: right;
+	margin: 10px;
+	width: auto;
+	height: auto;
+	font-size: 40px;
+	line-height: 35px;
+	cursor: pointer;
+}
+
+.menu ul {
+	position: absolute;
+	display: none;
+	z-index: 9999;
+	
+	right: 25px;
+	top: 5px;
+	
+	min-width: 150px;
+	width: auto;
+	height: auto;
+	border: solid 1px black;
+	background: white;
+	
+	margin: 0;
+	padding: 5px 0 5px 0;
+}
+
+.menu  ul li {
+	margin: 0;
+	padding: 0px 15px 0px 15px;
+	list-style: none;
+	white-space: nowrap;
+}
+
+.home.container div {
+	display: inline-block;
+	width: 190px;
+	text-align: center;
+	font-size: 14px;
+	margin: 10px 20px 20px 10px;
+	padding: 20px;
+	border: solid 1px white;
+}
+
+.home.container div:hover {
+	cursor: pointer;
+	border: solid 1px lightgray;
+}
+
+.about.container {
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	top: 15%;
+	left: 50%;
+	background: white;
+	width: 320px;
+	margin-left: -160px;
+}
+
+.about.container fieldset fieldset {
+	border: solid 1px black;
+	margin: 0 10px 10px 0;
+	padding: 10px;
+}
+
+.about.container fieldset fieldset legend {
+	padding: 0 10px;
+}
+
+.about.container input[type=text] {
+	width: 250px;
+}
+
+.about.container input[type=text].title {
+	width: 300px;
+	background: lightgray;
+	text-align: center;
+	font-size: 20px;
+}
+
+.node.container div.about {
+	display: none;
+}
+
+.container {
+	margin-bottom: 10px;
+	border: solid 1px black;
+	padding: 10px 0 0 10px;
+}
+
+.container div.box {
+	display: inline-block;
+	width: 100%;
+	padding: 0 10px 10px 0;
+}
+
+.container .menu {
+	margin: 0;
+	margin-right: 10px;
+	font-size: 30px;
+	line-height: 30px;
+	color: darkgray;
+}
+
+.container .menu  ul {
+	right: 20px;
+	top: 5px;
+}	
+
+.container td .menu {
+	overflow: visible;
+	position: absolute;
+	font-size: 20px;
+	line-height: 25px;
+	top: 0px;
+	right: 10px;
+	margin: 0px;
+}
+
+.container textarea,
+.container select,
+.container input[type=range],
+.container input[type=text],
+.container input[type=number],
+.container input[type=password] {
+	width: 290px;
+}
+.container input[type=checkbox],
+.container input[type=radio] {
+	width: 20px;
+	height: 20px;
+	margin-right: 270px;
+	vertical-align: text-top;
+}
+.container input[type=radio] {
+	margin-right: 40px;
+} 
+
+.container textarea {
+	height: 100px;
+}
+
+.container fieldset {
+	border: none;
+}
+
+.container fieldset.group {
+	border-top: solid 1px gray;
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+
+.container fieldset.group legend {
+	font-weight: bold;
+	color: green;
+	padding: 0 10px 0 0;
+}
+
+.container fieldset.default {
+	border: solid 1px gray;
+	padding: 10px;
+	margin: 0 10px 10px 0;
+}
+
+.container fieldset.default legend {
+	padding: 0 10px 0 10px;
+}
+.container fieldset.default label {
+	width: 130px;
+}
+.container fieldset.default input[type=range],
+.container fieldset.default input[type=text],
+.container fieldset.default input[type=number],
+.container fieldset.default input[type=password] {
+	width: 270px;
+}
+
+.device h3 {
+	margin-right: 10px;
+	line-height: 40px;
+}
+
+.device form, 
+.device div {
+	border: solid 1px lightgray;
+	margin: 0 10px 10px 0;
+	padding: 10px 0 0 10px;
+}
+
+.devices .device form, 
+.devices .device div {
+	display: none;
+}
+
+.device img {
+	vertical-align: middle;
+}
+.device img:hover {
+	background: lightgreen;
+}
+
+.device label {
+	width: 160px;
+}
+
+.device input[type=range],
+.device input[type=text],
+.device input[type=number],
+.device input[type=password] {
+	width: 250px;
+}
+.device input.number[type=range],
+.device input.number[type=text],
+.device input.number[type=number],
+.device input.number[type=password] {
+	width: 210px;
+}
+.device input[type=checkbox] {
+	margin-right: 200px;
+}
+
+.parameters table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-top:  solid 1px black;
+	border-left: solid 1px black;
+}
+
+.parameters td,
+.parameters th {
+	border-right:  solid 1px black;
+	border-bottom: solid 1px black;
+}
+
+.parameters .description {
+	display: none;
+	white-space: normal;
+}
+.parameters div.description {
+	padding: 0 5px;
+	margin-bottom: 10px;
+}
+
+.parameters.trigger {
+	white-space: normal;
+	padding-right: 15px;
+}
+
+#trigger-parameters select[name=minutes] {
+	width: 50px;
+}
+
+#trigger-parameters select[name=hour] {
+	width: 50px;
+	margin-right: 0;
+}
+
+#trigger-parameters select[name=date] {
+	width: 65px;
+}
+
+#trigger-parameters select[name=month] {
+	width: 65px;
+}
+
+#trigger-parameters div.group,
+#action-parameters div.group,
+#trigger-parameters div.radio,
+#action-parameters div.radio {
+	display: inline-block;
+	width: 290px;
+	vertical-align: top;
+}
+
+div.radio label {
+	width: 30px;
+}
+
+#action-parameters div.property-selector {
+	position: relative;
+}
+
+#action-parameters div.property-selector input {
+	width: 260px;
+	margin-right: 0px;
+}
+
+#action-parameters div.property-selector div.button {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	vertical-align: top;
+	background: black url('/images/tip-search-24i.png') no-repeat;
+}
+
+#action-parameters div.property-selector div.button:hover {
+	background-color: green;
+	cursor: pointer;
+}
+
+#action-parameters div.property-selector div.selector {
+	display: none;
+	width: 260px;
+	max-height: 130px;
+	background: white;
+	border: solid 1px black;
+	position: absolute;
+	top: 24px;
+	overflow: auto;
+	z-index: 999;
+}
+
+#action-parameters div.property-selector div.selector div:hover {
+	background: lightgray;
+}
+
+.network form {
+	display: none;
+}
+
+.network.container p {
+	margin: 10px;
+	margin-left: 0px;
+	color: red;
+}
+
+.network span {
+	font-size: 14px;
+	float: right;
+	margin-right: 10px;
+}
+
+.network span.address {
+	font-size: 15px;
+	float: none;
+	color: darkgray;
+	margin: 0;
+}
+
+.scan-config .ssid {
+	display: none;
+}
+
+.scan-config .ssid {
+	display: none;
+}
+
+.scan-config .host {
+	display: none;
+}
+
+.api-key {
+	display: inline-block;
+	width: 290px;
+	margin: 0 10px 10px 0;
+	vertical-align: top;
+}
+
+.select-error,
+.confirmation {
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	top: 30%;
+	left: 50%;
+	width: 320px;
+	margin-left: -160px !important;
+	background: white;
+	border: solid 1px black;
+	padding: 20px;
+	padding-bottom: 10px;
+}
+
+.select-error p,
+.confirmation  p {
+	font-size: 15px;
+	color: black;
+	margin: 0 0 20px 0 !important;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4);
+}
+
+.svg {
+	border: solid 1px black;
+	width: 100%;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.svg .container {
+	padding: 10px;
+	border: none;
+	position: relative;
+	overflow: hidden;
+}
+
+.svg svg {
+	display: block;
+}
+
+.svg .legend {
+	margin: 10px;
+}
+
+.svg .legend svg {
+	display: inline-block;
+}
+
+.svg .label {
+	display: none;
+	position: absolute;
+	border: solid 1px black;
+	background: white;
+	white-space: nowrap;
+	padding: 5px;
+	font-size: 15px;
+}
+
+.svg .dot {
+	display: none;
+	position: absolute;
+}
+
+.svg .title {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.svg .navigation {
+	width: auto;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	font-size: 0;
+}
+
+.svg .navigation div {
+	width: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	margin: 0 15px 15px 0;
+}
+
+.svg .date,
+.svg .shift-left,
+.svg .shift-right,
+.svg .zoom-in,
+.svg .zoom-out,
+.svg .reset {
+	cursor: pointer;
+	font-size: 15px;
+	height: 20px;
+	text-align: center;
+	line-height: 15px;
+	background: white;
+}
+
+.svg .navigation div.zoom-out {
+	margin-bottom: 0;
+}
+
+.cause p,
+.fire p {
+	margin-bottom: 5px;
+}
+
+.svg .navigation .calendar {
+	position: absolute;
+	right: 0px;
+	background: white;
+	border: solid 1px black;
+	padding: 10px;
+	width: 270px;
+	display: none;
+	z-index: 999;
+}
+
+.svg .navigation .calendar div {
+	display: inline-block;
+	margin: 0;
+	width: 35px;
+	line-height: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.svg .navigation .calendar > div.header {
+	width: 100%;
+	font-weight: bold;
+}
+
+.calendar form {
+	border-bottom: solid 1px black;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+
+.calendar > div.header div {
+	float: left;
+}
+
+.calendar div.day a {
+	color: black;
+	text-decoration: none;
+}
+
+.calendar div.today a {
+	color: blue;
+	font-weight: bold;
+}
+
+.calendar div.current a {
+	color: red;
+	font-weight: bold;
+}
+
+.calendar div.gray a {
+	color: lightgray;
+}
+
+.calendar button.month {
+	font-size: 16px;
+	margin: 0;
+	padding: 0 5px;
+}
+
+.calendar .prev {
+	float: left;
+}
+
+.calendar .next {
+	float: right;
+}
+
+.ssl textarea {
+	width: 440px;
+	height: 200px;
+}
+
+@media only screen and (max-device-width:640px) {
+	.home.container div {
+		width: 120px;
+	}
+	
+	.device input.number[type=range],
+	.device input.number[type=text],
+	.device input.number[type=number],
+	.device input.number[type=password] {
+		width: 235px;
+	}
+	.device input[type=checkbox] {
+		margin-right: 225px;
+	}
+	
+	.ssl textarea {
+		width: 300px;
+	}
+
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html manifest="appcache.manifest">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>ESP8266 Setup</title>
+	
+	<link rel="manifest" href="manifest.json" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	
+	<link rel="icon" sizes="192x192" href="setup-192.png" />
+	<link rel="icon" sizes="128x128" href="setup-128.png" />
+	<link rel="icon" sizes="48x48"   href="setup-48.png" />
+	<link rel="icon" sizes="32x32"   href="setup-32.png" />
+	
+	<link rel="apple-touch-icon"             sizes="128x128" href="setup-128.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="setup-128.png" />	
+	
+	<link rel="stylesheet" type="text/css" href="style.css" />	
+	
+	<script src="jquery-1.11.3.min.js"></script>
+	<script src="lib.js"></script>
+	<script src="setup.js"></script>
+	
+	<script>
+		if (window.location.protocol == 'https:') {
+			window.location.replace('http:' + window.location.href.substring(window.location.protocol.length));
+		}
+		
+		if (window.applicationCache) {
+			applicationCache.addEventListener(
+				'updateready', 
+				function() {
+					window.location.reload();
+				}
+			);
+		}
+	</script>
+</head>
+
+<body>
+	<div id="container">
+		<h1>ESP8266 Setup</h1>
+		<form id="esp8266" method="POST">
+			<div class="status"></div>
+			<input type="hidden" name="connection_host"     value="192.168.4.1" />
+			<input type="hidden" name="connection_user"     value="olimex" />
+			<input type="hidden" name="connection_password" value="olimex" />
+			
+			<fieldset class="wizard WiFiScan">
+				<legend>Connect to your node</legend>
+				<p>
+					Before configuring your new ESP8266 node you have to connect 
+					your WiFi to the node's Access Point.
+				</p>
+				<p>
+					Depending on your product the SSID of the node is one of the following:
+				</p>
+				<ul>
+				  <li><b>ESP_OLIMEX</b>_XXXXXX</li>
+				  <li><b>ESP_PLUG</b>_XXXXXX</li>
+				  <li><b>ESP_SWITCH1</b>_XXXXXX</li>
+				  <li><b>ESP_SWITCH2</b>_XXXXXX</li>
+				  <li><b>ESP_DIMMER</b>_XXXXXX</li>
+				</ul>
+				<p>
+					Default password is <b>olimex-ap</b>
+				</p>
+			</fieldset>
+			
+			<fieldset class="wizard NotNULL">
+				<legend>User</legend>
+				<p>
+					Enter username and password to access the node. 
+				</p>
+				<p>
+					If you are planning to use <a href="https://>iot.olimex.com">iot.olimex.com</a> 
+					as IoT server then enter the credentials received from 
+					<a href="https://>iot.olimex.com">iot.olimex.com</a>.
+				</p>
+				<label>Name</label>      <input type="text" name="user"      value="" /> <br/>
+				<label>Password</label>  <input type="text" name="password"  value="" /> <br/>
+			</fieldset>
+			
+			<fieldset class="wizard NotNULL">
+				<legend>Access Point</legend>
+				<p>
+					Set Access Point SSID and password for direct connection to the node.
+					It is recommended to choose a descriptive SSID, for example, KitchenPLUG. 
+				</p>
+				<p>
+					<b>Password must be at least 8 characters long.</b>
+				</p>
+				<label>SSID</label>      <input type="text" name="ap_ssid"      value="" /> <br/>
+				<label>Password</label>  <input type="text" name="ap_password"  value="" data-min="8" /> <br/>
+			</fieldset>
+			
+			<fieldset class="wizard Station">
+				<legend>Wireless Network</legend>
+				<p>
+					Enter the credentials of your existing local WiFi network.
+				</p>
+				<label>SSID</label>
+				<select name="station_select">
+					<option value="">-- Select Network --</option>
+					<option value="~">Custom...</option>
+				</select><br/>
+				<div id="station_custom">
+					<label></label>
+					<input type="hidden" name="station_ssid" value="" /> 
+				</div>
+				
+				<label>Password</label>  <input type="text"     name="station_password"  value="" data-min="0" /> <br/>
+				<label>DHCP</label>      <input type="checkbox" name="station_dhcp" value="1" checked="checked" /> <br/>
+				<fieldset id="ip">
+					<legend>IP</legend>
+					<label>Address</label> <input type="text" name="station_Address" value="" /> <br/>
+					<label>NetMask</label> <input type="text" name="station_NetMask" value="" /> <br/>
+					<label>Gateway</label> <input type="text" name="station_Gateway" value="" /> <br/>
+				</fieldset>
+			</fieldset>
+			
+			<fieldset class="wizard">
+				<legend>IoT Server</legend>
+				<p>
+					IoT server configuration. The node would attempt to connect to this server.
+				</p>
+				<label>WebSocket</label>   <input type="checkbox" name="iot_websocket" value="1" checked="checked" /> <br/>
+				<label>SSL</label>         <input type="checkbox" name="iot_ssl"       value="1" /> <br/>
+				<label>Server</label>      <input type="text"     name="iot_server"    value="iot.olimex.com" /> <br/>
+				<label>Entry Point</label> <input type="text"     name="iot_path"      value="/events" /> <br/>
+			</fieldset>
+			
+			<div class="confirmation">
+				<p>Do you want to save the configuration information in the ESP8266 node?</p>
+				<button type="button">Yes</button>
+				<button type="button">No</button>
+			</div>
+			
+			<div class="progress">
+				<p>Configuration of ESP8266 node in progress...</p>
+			</div>
+			
+			<div class="fail">
+				<p>Configuration of ESP8266 failed.</p>
+				<button type="button" class="again">Back</button>
+				<button type="submit" class="retry">Retry</button>
+			</div>
+			
+			<div class="success">
+				<p>
+					Your ESP8266 node was successfully configured.
+					You may now disconnect your WiFi from the node.
+				</p>
+				<button type="button" class="again">Restart</button>
+			</div>
+			
+			<button type="button" class="wizard back">Back</button>
+			<button type="button" class="wizard next">Next</button>
+			<button type="submit" class="wizard submit">Configure</button><br/>
+		</form>
+		
+	</div>
+</body>
+</html>

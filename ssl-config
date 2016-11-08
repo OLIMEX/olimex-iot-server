@@ -1,0 +1,39 @@
+#!/bin/sh
+
+#
+# SSL Certificates configuration
+#
+
+if [ $# -ne 1 ]; then
+	echo "Wrong number of parameters"
+	exit 1
+fi
+
+
+KEY="${1}.key"
+PEM="${1}.pem"
+
+SRC="/var/www/olimex-iot/data/"
+DST_KEY="/etc/ssl/private/"
+DST_PEM="/etc/ssl/certs/"
+
+if [ -f ${SRC}${KEY} ] && [ -f ${SRC}${PEM} ]; then
+	cp -f ${SRC}${KEY} ${DST_KEY}${KEY}
+	cp -f ${SRC}${PEM} ${DST_PEM}${PEM}
+	
+	chmod 600 ${DST_KEY}${KEY}
+	chmod 644 ${DST_PEM}${PEM}
+	
+	sed -i "s|ssl_certificate_key\s.*;|ssl_certificate_key ${DST_KEY}${KEY};|g" /etc/nginx/sites-available/olimex-iot
+	sed -i "s|ssl_certificate\s.*;|ssl_certificate ${DST_PEM}${PEM};|g" /etc/nginx/sites-available/olimex-iot
+	
+	rm -f ${SRC}${KEY}
+	rm -f ${SRC}${PEM}
+	
+	service nginx reload
+	
+	exit 0
+else
+	echo "File $KEY or $PEM does not exist"
+	exit 1
+fi

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Direct Node Connection</title>
+</head>
+
+<body>
+	<h1>Direct Node Connection</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>
+		Direct node connection gives you full control over IoT Node. You can change all settings, credentials
+		and upload new versions of the firmware. Direct node connection is not always possible.
+	</p>
+	<blockquote>
+		For example if you use our free OlimexIoT Service and you are outside your home network there 
+		is no way to direct connect to your nodes.
+	</blockquote>
+	<p>
+		Direct node connection is implemented as HTML5 application located at 
+		<a href="http://iot.olimex.com/direct/">http://iot.olimex.com/direct/</a>
+	</p>
+	
+	<p>
+		To direct connect to a node you can use node's Access point	or Station IP address.
+		Default address is set to 192.168.4.1 which is AP default address.
+	</p>
+	<img src="images/direct-01.jpg" />
+	
+	<h2>Connect via AP</h2>
+	<p>To connect using node's AP you have to be in the range of AP and</p>
+	<ol>
+		<li>
+			Navigate to <a href="http://iot.olimex.com/direct/">http://iot.olimex.com/direct/</a>
+			to open the application.
+		</li>
+		<blockquote class="hint">
+			If you are using a mobile device you can use <span class="green">Add to Home screen</span> in order to have the HTML5 
+			application available even when you are not online.
+		</blockquote>
+		<br/>
+		<li>
+			Connect your WiFi to node's AP. <br/>
+			Default SSID is one of
+			<ul>
+				<li>ESP_OLIMEX_XXXXXX</li>
+				<li>ESP_PLUG_XXXXXX</li>
+				<li>ESP_SWITCH1_XXXXXX</li>
+				<li>ESP_SWITCH2_XXXXXX</li>
+				<li>ESP_DIMMER_XXXXXX</li>
+			</ul>
+			Default PSK <b>olimex-ap</b>
+		</li>
+		<li>
+			Enter AP's IP address <br/>
+			default is <b>192.168.4.1</b>
+		</li>
+		<li>
+			Enter <span class="green">User</span><br/>
+			default <b>olimex</b></li>
+		<li>
+			Enter <span class="green">Password</span><br/>
+			default <b>olimex</b></li>
+		<li>
+			Press <span class="green">Connect</span> button
+		</li>
+	</ol>
+	<blockquote>
+		After finishing your work with the node you may want to disconnect your device from node's AP and 
+		connect it back to your WiFi network.
+	</blockquote>
+	
+	<h2>Connect via Station IP</h2>
+	<p>
+		Login to IoT Server. There are two ways to connect to your node using different IP addresses. 
+	</p>
+	<ul>
+		<li>From main screen</li>
+		<li>From node's Station Info</li>
+	</ul>
+	<p>
+		From main screen click on the name of the node. This is usable when your device the IoT Server 
+		and the node are in same network.
+	</p>
+	<blockquote class="info">
+		Note that in this case if there is NAT firewall or proxy server between the node and the 
+		IoT Server its address will be used and this will probably block the connection to the node.
+	</blockquote>
+	<img src="images/direct-02.jpg" />
+	
+	<p>
+		Click on IP address from node's Station Info. This is usable when your device and the node 
+		are in same network.
+	</p>
+	<blockquote class="info">
+		Note that this case internal network address of the node will be used and this will work only
+		if you are in the same network with the node.
+	</blockquote>
+	<img src="images/direct-03.jpg" />
+	
+	<p>
+		If connection is successful system information about the node will be displayed. From this
+		screen you can restart the node or reset all settings to factory defaults.
+	</p>
+	<img src="images/direct-04.jpg" />
+	
+	<h2>General Config</h2>
+	<p>
+		Here you can change the <span class="green">User</span> and the <span class="green">Password</span> 
+		used when connecting to the node. You can set <span class="green">Mode</span> in which node operates: 
+		Access Point, Station or both. If <span class="green">Authentication</span> check box is unchecked 
+		you can connect without user and password. If <span class="green">SSL</span> check box is checked 
+		only SSL connections will be accepted.
+	</p>
+	<img src="images/direct-05.jpg" />
+	
+	<h2>Configure Access Point</h2>
+	<p>Here you can configure node's Access Point.</p>
+	<img src="images/direct-06.jpg" />
+	
+	<h2>Configure Station</h2>
+	<p>
+		Here you can configure node's Station i.e. credentials for your existing WiFi network 
+		to which node will connect. If you are using DHCP you and the node is connected you 
+		can see node's IP address.
+	</p>
+	<img src="images/direct-07.jpg" />
+	
+	<h2>Configure IoT</h2>
+	<p>Here you can configure connection to IoT Server</p>
+	<img src="images/direct-08.jpg" />
+	
+	<h2>Configure SSL</h2>
+	<p>Here you can upload your private key and certificate used for direct SSL connections.</p>
+	<img src="images/direct-09.jpg" />
+	
+	<h2>Firmware Update</h2>
+	<p>Here you can update boot loader or firmware.</p>
+	<img src="images/direct-10.jpg" />
+	
+	<h2>Devices</h2>
+	<p>All other tabs are for discovered devices.</p>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

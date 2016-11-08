@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Automated Node Setup</title>
+</head>
+
+<body>
+	<h1>Automated ESP8266 Node Setup</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>
+		This is option is available only if 
+	</p>
+	
+	<ol>
+		<li>You use <a href="server/index.html">your own OlimexIoT server</a></li>
+		<li>
+			<a target="_blank" href="https://www.olimex.com/Products/USB-Modules/MOD-WIFI-R5370/">MOD-WIFI-R5370</a>
+			is connected to your board
+		</li>
+		<li>
+			You are connecting to the server via Ethernet or USB interface i.e. 
+			WiFi interface is free to scan for access points
+		</li>
+		<li>
+			Nodes you want to configure are reset to factory default settings. Otherwise setup will not
+			be able to establish direct connection.
+		</li>
+	</ol>
+	
+	<p>Otherwise you have to use <a href="node-setup.html">Manual node setup</a>.</p>
+	
+	<p>
+		Connect and log on to your OlimexIoT server. If all of the above conditions are met you should see
+		auto-setup icon <img src="images/auto-setup.jpg"/>. Click on it to enter the setup.
+	</p>
+	
+	<img src="images/auto-00.jpg"/>
+	
+	<a name="procedure"></a>
+	<p>
+		Setup will scan for ESP8266 access points and will display them bellow configuration
+		parameters.	If the access point SSID matches the default it will be selected for configuration.
+		You can change default selection by clicking on the SSID of the access point.
+	</p>
+	<blockquote class="hint">
+		If you have to configure more than one node from same type (e.g. three ESP8266-PLUGs) switch 
+		them on one by one so you can easily distinguish them.
+	</blockquote>
+	<img src="images/auto-01.jpg"/>
+	<p>
+		If your node is not shown you can force new scan by clicking the refresh 
+		<img src="images/refresh.jpg"/> icon.
+	</p>
+	
+	<h2>Password confirmation</h2>
+	<p><b>Password</b> - confirm your OlimexIoT server password</p>
+	
+	<h2>Access Point config</h2>
+	<p>
+		<b>New PSK</b> - choose PSK for direct access to the configured nodes.
+		The password should be at least 8 characters long. 
+	</p>
+	
+	<h2>Station config</h2>
+	<p>
+		<b>WiFi Network</b> - choose Access Point from dropdown list or select <span class="green">Custom...</span>
+		to enter it manually. This should be your existing WiFi network SSID and the configured nodes will 
+		attempt to connect to it.
+	</p>
+	<p><b>PSK</b> - enter PSK for selected WiFi access point.</p>
+	
+	<h2>IoT config</h2>
+	<p>
+		<b>Host</b> - choose from the list or select <span class="green">Custom...</span>
+		to enter it manually. This is the name or IP address of your OlimexIoT server. 
+		Configured nodes will try to connect to it and report events.
+	</p>
+
+	<h2>ESP8266 Nodes</h2>
+	<p>
+		<b>Name / SSID</b> - for each selected for configuration node you will be able to enter
+		new Name / SSID. Choose descriptive name so you can easily distinguish different nodes.
+	</p>
+	
+	<p>When you are ready click on <span>Configure</span> button.</p>
+	
+	<h2>Progress...</h2>
+	<p>You should see something like this...</p>
+	<img src="images/auto-02.jpg"/>
+	
+	<p>Continue with <a href="node-monitor.html">Node monitoring</a> or <a href="node-manage.html">Node management</a></p>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

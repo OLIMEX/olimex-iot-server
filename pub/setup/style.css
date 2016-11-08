@@ -1,0 +1,172 @@
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+body {
+	font: 16px Arial, sans-serif;
+	line-height: 30px;
+	white-space: nowrap;
+}
+
+h1 {
+	margin: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 30px;
+	background-color: lightgray;
+}
+
+p,
+ul, 
+li {
+	white-space: normal;
+	font-size: 16px;
+	color: black;
+	margin-top: 0px;
+	line-height: 25px;
+}
+
+legend {
+	font-weight: bold;
+}
+
+#container {
+	padding: 10px;
+	
+	width: 360px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#ip,
+#station_custom {
+	display: none;
+}
+
+form {
+	vertical-align: top;
+	margin: 0;
+}
+
+fieldset {
+	display: block;
+	border: solid 1px black;
+	margin-bottom: 10px;
+}
+
+label {
+	display: inline-block;
+	width: 120px;
+}
+
+input, 
+select {
+	font-size: 16px;
+}
+
+input[type=text],
+input[type=password],
+select {
+	width: 185px;
+}
+
+#ip input[type=text] {
+	width: 150px;
+}
+
+.status {
+	font-size: 14px;
+	line-height: 25px;
+	background: gray;
+	color: white;
+	padding: 0 10px;
+	margin: 0 2px;
+}
+
+.activity {
+	background: gray;
+	color: lightblue;
+}
+
+.error {
+	background: red;
+	color: white;
+}
+
+.wizard {
+	display: none;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4);
+}
+
+button {
+	font-size: 18px;
+}
+
+button.wizard {
+	display: none;
+}
+
+button.wizard.back {
+	float: left;
+}
+
+button.wizard.next,
+button.wizard.submit {
+	float: right;
+}
+
+.confirmation {
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	top: 30%;
+	left: 50%;
+	width: 320px;
+	margin-left: -160px;
+	background: white;
+	border: solid 1px black;
+	padding: 20px;
+	padding-bottom: 10px;
+}
+
+.progress,
+.fail,
+.success {
+	display: none;
+	margin-top: 10px;
+}
+
+.confirmation  p,
+.progress p,
+.fail p,
+.success p {
+	font-size: 15px;
+	color: black;
+	margin-bottom: 20px;
+}
+
+@media only screen and (max-device-width:640px) {
+	body {
+		margin:0;
+		padding: 0;
+	}
+	
+	#container {
+		width: 100%;
+		border: none;
+	}
+}

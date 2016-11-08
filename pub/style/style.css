@@ -1,0 +1,351 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	color: black;
+}
+
+a {
+	color: green;
+	text-decoration: underline;
+}
+
+h1 {
+	margin: 10px 0;
+	text-align: center;
+	font-weight: bold;
+	font-size: 25px;
+	line-height: 35px;
+	background-color: lightgray;
+}
+
+h2 {
+	font-size: 23px;
+	line-height: 27px;
+}
+
+h2 a {
+	color: black;
+	text-decoration: none;
+}
+
+h2.wifi  {
+	cursor: pointer;
+	padding-left: 40px;
+	background: url('/images/wifi.png') no-repeat 5px;
+}
+
+h2.lan  {
+	cursor: pointer;
+	padding-left: 40px;
+	background: url('/images/lan.png') no-repeat 0px;
+}
+
+h2.usb  {
+	cursor: pointer;
+	padding-left: 40px;
+	background: url('/images/usb.png') no-repeat 5px;
+}
+
+h2.wifi:hover,
+h2.lan:hover {
+	color: green;
+}
+
+h2 a {
+	display: block;
+}
+
+h2 a:hover {
+	color: green;
+}
+
+p {
+	font-size: 13px;
+	line-height: 20px;
+	color: gray;
+}
+
+p.guide {
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 20px;
+}
+
+p.guide b {
+	color: green;
+}
+
+p.user {
+	text-align: right;
+}
+
+p.user a {
+	text-decoration: none;
+	color: green;
+	font-weight: bold;
+}
+
+.container p {
+	margin: -5px 10px 10px 20px;
+}
+
+tr:nth-child(odd) {
+	background: lightcyan;
+}
+
+tr:hover {
+	background: lightgray;
+	cursor: pointer;
+}
+
+th {
+	font-size: 17px;
+	line-height: 25px;
+}
+
+td {
+	font-size: 15px;
+	line-height: 25px;
+}
+
+th, td.th {
+	background: lightgreen;
+}
+
+td a {
+	text-decoration: none;
+	color: blue;
+}
+
+label {
+	font-size: 14px;
+	line-height: 16px;
+}
+
+label img:hover {
+	background: lightgreen;
+}
+
+button {
+	font-size: 18px;
+	margin: 0 10px 10px 0;
+	padding: 0 20px;
+}
+
+textarea,
+select,
+input {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	border: solid 1px darkgray;
+}
+
+textarea {
+	vertical-align: top;
+	resize: none;
+}
+
+input[disabled=disabled] {
+	background: white;
+	border: none;
+	color: black;
+	font-weight: bold;
+}
+
+select.required,
+input.required {
+	border: solid 1px green;
+}
+
+.error {
+	color: red;
+}
+
+.success {
+	color: green;
+}
+
+.center {
+	text-align: center;
+}
+
+.back a {
+	color: black;
+}
+
+.menu a {
+	color: black;
+	text-decoration: none;
+}
+
+.menu  ul {
+	font-size: 17px;
+	font-weight: normal;
+}
+
+.menu  ul li {
+	cursor: pointer;
+}
+
+	
+.menu  ul li:hover {
+	background-color: lightcyan;
+}
+
+.menu  ul li a {
+	display: block;
+	width: 100%;
+	color: black;
+	text-decoration: none;
+}
+
+.node.off {
+	background: lightgray;
+}
+
+.node .error,
+.node .token ,
+.node .ip{
+	font-size: 15px;
+}
+
+.node .token {
+	color: darkgray;
+}
+
+.device {
+	font-size: 16px;
+	line-height: 25px;
+}
+
+.device .error {
+	float: right;
+}
+
+.device h3 {
+	font-size: 16px;
+	font-weight: normal;
+	
+	padding-left: 35px;
+	background: url('/images/device.png') no-repeat 5px;
+	
+	cursor: pointer;
+}
+
+.device h3:hover {
+	background-color: lightgreen;
+}
+
+.node.off .device,
+.device.off {
+	background-color: lightgray;
+}
+
+.node.off input,
+.device.off input {
+	background: lightgray;
+}
+
+tr.active {
+	background-color: lightgray;
+}
+
+.parameters .description {
+	color: black;
+	background-color: #e6e6e6;
+}
+
+.parameters tr {
+	background: inherit;
+}
+
+.parameters th {
+	background: inherit;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.parameters.editable {
+	color: blue;
+}
+
+.parameters.disabled {
+	color: red;
+}
+
+.network.container.down {
+	background: lightgray;
+}
+
+.network.container.selected {
+	background: white;
+}
+
+.scan-config .node {
+	background: lightgray;
+}
+
+.scan-config .node.config {
+	background: white;
+}
+
+.api-key {
+	font-weight: normal;
+	word-wrap: break-word;
+}
+
+.cause,
+.fire {
+	font-size: 16px;
+	line-height: 25px;
+}
+
+.cause b {
+	color: orange;
+}
+
+.fire b {
+	color: red;
+}
+
+.svg .date {
+	background: url('/images/calendar.png') no-repeat;
+}
+
+.svg .shift-left {
+	background: url('/images/left.png') no-repeat;
+}
+
+.svg .shift-right{
+	background: url('/images/right.png') no-repeat;
+}
+
+.svg .zoom-in {
+	background: url('/images/zoom-in.png') no-repeat;
+}
+
+.svg .zoom-out{
+	background: url('/images/zoom-out.png') no-repeat;
+}
+
+.svg .reset{
+	background: url('/images/reset.png') no-repeat;
+}
+
+.ssl textarea {
+	font-family: monospace;
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+div.catch {
+	display: inline-block;
+}
+
+div.catch  input {
+	cursor: pointer;
+	color: green;
+}

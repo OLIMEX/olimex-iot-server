@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Glossary</title>
+</head>
+
+<body>
+	<h1>Olimex IoT Glossary</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<a name="action"></a>
+	<h2>Action</h2>
+	<p>
+		<b>Action</b> - A plugin function which performs certain task. 
+	</p>
+	<blockquote>
+		For example action can send an e-mail to the user or a command to <a href="#device">IoT Device</a>.
+	</blockquote>
+	<p><a href="javascript:window.history.back();">Back</a></p>
+	
+	<a name="filter"></a>
+	<h2>Filter</h2>
+	<p>
+		<b>Filter</b> - A plugin function which is applied over the values of <a href="#property">property</a> 
+		to reduce or enhance certain of property's characteristics.
+	</p>
+	<p><a href="javascript:window.history.back();">Back</a></p>
+	
+	<a name="device"></a>
+	<h2>Device</h2>
+	<p>
+		<b>IoT Device</b> - Electronic module which is accessed physically and can be controlled 
+		by <a href="#node">IoT Node</a>. Communication between the node and the device uses
+		I<sup>2</sup>C, SPI or UART interface. 
+		Many devices can be handled by the same <a href="#node">IoT Node</a>.
+	</p>
+	<p><a href="javascript:window.history.back();">Back</a></p>
+	
+	<a name="node"></a>
+	<h2>Node</h2>
+	<p>
+		<b>IoT Node</b> - Communication unit which handles one or more <a href="#device">IoT Devices</a>.
+		If configured the node connects to the <a href="#server">IoT Server</a> and sends information
+		about occurred events and receives commands to be executed from <a href="#device">IoT Devices</a>.
+	</p>
+	<p><a href="javascript:window.history.back();">Back</a></p>
+	
+	<a name="property"></a>
+	<h2>Property</h2>
+	<p>
+		<b>Property</b> - An attribute, quality, or characteristic of <a href="#device">IoT Device</a>.
+		Properties can be numeric or textual as well as read-only or read-write.
+	</p>
+	<blockquote>
+		For example, <b>MOD-EMTR</b> device has the <b>VoltageRMS</b> property, which represents the 
+		momentary measured RMS Voltage in deci-volts and this is a read-only property.
+	</blockquote>
+	<p><a href="javascript:window.history.back();">Back</a></p>
+	
+	<a name="server"></a>
+	<h2>Server</h2>
+	<p>
+		<b>OlimexIoT Server</b> - Server to which <a href="#node">IoT Nodes</a> <i>(if configured)</i> 
+		send information about events that occurred. All reported events are logged into the server's database.
+		The server can send to the node commands to be executed.
+	</p>
+	<p>
+		The server is designed to support multiple users and multiple nodes per user.
+	</p>
+	<p>
+		You can <a href="server/index.html">build your own OlimexIoT Server</a> or 
+		<a href="service.html">use our free OlimexIoT Service</a>.
+	</p>
+	<p><a href="javascript:window.history.back();">Back</a></p>
+	
+	<a name="trigger"></a>
+	<h2>Trigger</h2>
+	<p>
+		<b>Trigger</b> - A condition, that causes <a href="#action">Action</a> to take place, when met.
+		Conditions can be event-based <i>(execute when temperature passes over 25&deg;C)</i> or time-based 
+		<i>(execute action every monday)</i>.
+	</p>
+	<p><a href="javascript:window.history.back();">Back</a></p>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	<div style="height:1000px;">&nbsp;</div>
+</body>
+</html>

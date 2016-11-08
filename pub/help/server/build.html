@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="../images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="../images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="../images/olimex.png" />
+
+	<link href="../layout.css" rel="stylesheet" type="text/css" />
+	<link href="../style.css"  rel="stylesheet" type="text/css" />
+
+	<title>Olimex IoT - How to build image</title>
+</head>
+
+<body>
+<h1>How to build image for OlimexIoT server</h1>
+<h5>Advanced users only</h5>
+
+<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+
+<p>
+Following instructions are tested on Ubuntu 14.04 LTS and 16.04 LTS.
+</p>
+<ul>
+<li><a href="#tools">Cross compiler and tools setup</a></li>
+<li><a href="#u-boot">Building u-boot</a></li>
+<li><a href="#kernel">Building kernel</a></li>
+<li><a href="#file-system">Making file system</a></li>
+<li><a href="#sd-card">Prepare SD-card</a></li>
+</ul>
+
+<a name="tools"></a>
+<h2>Cross compiler and tools setup</h2>
+<p>Install packages needed for cross compiling u-boot and kernel and partition table manipulation</p>
+<pre>
+sudo apt-get install gcc-arm-linux-gnueabihf
+sudo apt-get install git
+sudo apt-get install device-tree-compiler
+sudo apt-get install libncurses5-dev
+sudo apt-get install u-boot-tools
+sudo apt-get install qemu-user-static debootstrap binfmt-support
+sudo apt-get install parted e2fsprogs eject
+</pre>
+
+<p>Create folder for the project</p>
+<pre>
+mkdir ~/OlimexIoT
+</pre>
+
+<!-- ======================================= U-BOOT ======================================= -->
+
+<a name="u-boot"></a>
+<h2>Building u-boot</h2>
+<p>Get the sources</p>
+<pre>
+cd ~/OlimexIoT
+git clone git://git.denx.de/u-boot.git
+</pre>
+<p>List tags and get the latest <i>(in our case v2016.09)</i></p>
+<pre>
+cd ~/OlimexIoT/u-boot
+git tag -l
+git checkout tags/v2016.09 -b v2016.09
+</pre>
+<p>Build</p>
+<pre>
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 A20-OLinuXino_MICRO_defconfig
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4
+</pre>
+<p>If build is OK the last line shoult be <b>CAT u-boot-sunxi-with-spl.bin</b></p>
+
+<h3>Make boot scripts</h3>
+<p>Create source for SD-card</p>
+<pre>
+cat &lt;&lt;__EOF__ &gt; boot.cmd
+setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait panic=10 loglevel=0
+load mmc 0:1 0x43000000 sun7i-a20-olinuxino-micro.dtb
+load mmc 0:1 0x42000000 zImage
+bootz 0x42000000 - 0x43000000
+__EOF__
+</pre>
+<p>Build sctipt for SD-card</p>
+<pre>
+mkimage -C none -A arm -T script -d boot.cmd boot.scr
+</pre>
+<p>Create source for HDD</p>
+<pre>
+cat &lt;&lt;__EOF__ &gt; boot-hdd.cmd
+setenv bootargs console=ttyS0,115200 root=/dev/sda1 rootfstype=ext4 rw rootwait panic=10 loglevel=0
+load mmc 0:1 0x43000000 sun7i-a20-olinuxino-micro.dtb
+load mmc 0:1 0x42000000 zImage
+bootz 0x42000000 - 0x43000000
+__EOF__
+</pre>
+<p>Build sctipt for HDD</p>
+<pre>
+mkimage -C none -A arm -T script -d boot-hdd.cmd boot-hdd.scr
+</pre>
+
+<!-- ======================================= KERNEL ======================================= -->
+
+<a name="kernel"></a>
+<h2>Building kernel</h2>
+<p>Get the sources</p>
+<pre>
+cd ~/OlimexIoT
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --depth=1
+cd ~/OlimexIoT/linux
+</pre>
+<p>Get our .config</p>
+<pre>
+wget https://iot.olimex.com/install/OlimexIoT_defconfig -O .config
+</pre>
+<p>If you want - do some changes</p>
+<pre>
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+</pre>
+<p>Build</p>
+<pre>
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 zImage modules dtbs
+</pre>
+
+
+<!-- ======================================= FILE-SYSTEM ======================================= -->
+
+<a name="file-system"></a>
+<h2>Making file system</h2>
+<p>Create folder</p>
+<pre>
+cd ~/OlimexIoT
+mkdir rootfs
+</pre>
+<p>Make rootfs</p>
+<pre>
+sudo debootstrap --arch=armhf --foreign jessie rootfs
+</pre>
+<p>Copy qemu and set resolv.conf</p>
+<pre>
+sudo cp /usr/bin/qemu-arm-static rootfs/usr/bin/
+echo "nameserver 8.8.8.8" | sudo tee rootfs/etc/resolv.conf
+</pre>
+<p>Get into the new file system</p>
+<pre>
+sudo chroot rootfs
+</pre>
+<p>Inside the new file system</p>
+<pre>
+export LANG=C
+/debootstrap/debootstrap --second-stage
+</pre>
+<p>Set root password</p>
+<pre>
+passwd
+</pre>
+<p>In pre-build image we set password to <b>olimex</b></p>
+<p>Set hostname</p>
+<pre>
+echo "OlimexIoT" &gt; /etc/hostname
+echo "127.0.0.1       OlimexIoT" &gt;&gt; /etc/hosts
+</pre>
+<p>Automate boot partition mounting</p>
+<pre>
+cat &lt;&lt;__EOF__ &gt; /etc/fstab
+# &lt;file system&gt;         &lt;dir&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;
+/dev/mmcblk0p1          /boot   ext4    defaults        0       0
+__EOF__
+</pre>
+<p>Update apt sources list</p>
+<pre>
+cat &lt;&lt;__EOF__ &gt; /etc/apt/sources.list
+#------------------------------------------------------------------------------#
+#                   OFFICIAL DEBIAN REPOS                    
+#------------------------------------------------------------------------------#
+
+###### Debian Main Repos
+deb http://ftp.bg.debian.org/debian jessie main contrib non-free 
+deb-src http://ftp.bg.debian.org/debian jessie main contrib non-free 
+
+###### Debian Update Repos
+deb http://security.debian.org/debian-security jessie/updates main contrib non-free 
+deb-src http://security.debian.org/debian-security jessie/updates main contrib non-free 
+__EOF__
+</pre>
+<p>Resynchronize the package index files from their sources.</p>
+<pre>
+apt-get update
+</pre>
+<p>Set system locales</p>
+<pre>
+apt-get install locales dialog pv
+dpkg-reconfigure locales
+</pre>
+<p>Select <b><code>en_US.UTF-8 UTF-8</code></b> and set it as default locale</p>
+<p>Install wireless tools</p>
+<pre>
+apt-get install firmware-ralink wpasupplicant ethtool wireless-tools
+</pre>
+<p>Install parted</p>
+<pre>
+apt-get install parted
+</pre>
+<p>Install NTP</p>
+<pre>
+apt-get install ntp
+</pre>
+<p>Install Postfix MTA</p>
+<pre>
+apt-get install postfix
+</pre>
+<p>Postfix should be configured by the user at first run. So here we do not touch anything.</p>
+<img src="images/mta-00.jpg" />
+<p>Install ssh and sudo</p>
+<pre>
+apt-get install ssh sudo
+</pre>
+<p>Add <b>olimex</b> user</p>
+<pre>
+adduser olimex
+usermod -a -G sudo olimex
+</pre>
+<p>In pre-build image we set password to <b>olimex</b> and left all other to blank.</p>
+<p>Automate loading of USB Ethernet kernel module</p>
+<pre>
+echo "g_ether" &gt;&gt; /etc/modules
+</pre>
+<p>Configure ethernet and wireless network</p>
+<pre>
+echo "iface eth0 inet dhcp" &gt; /etc/network/interfaces.d/eth0
+echo "iface wlan0 inet dhcp" &gt; /etc/network/interfaces.d/wlan0
+</pre>
+<p>Configure USB Ethernet network</p>
+<pre>
+cat &lt;&lt;__EOF__ &gt; /etc/network/interfaces.d/usb0
+auto usb0
+iface usb0 inet static
+address 192.168.2.1
+netmask 255.255.255.0
+__EOF__
+</pre>
+<p>Install DHCP server</p>
+<pre>
+apt-get install isc-dhcp-server
+</pre>
+<p>Configure DHCP server for USB Ethernet network</p>
+<pre>
+cat &lt;&lt;__EOF__ &gt; /etc/dhcp/dhcpd.conf
+ddns-update-style none;
+default-lease-time 28800;
+max-lease-time 43200;
+option subnet-mask 255.255.255.0;
+subnet 192.168.2.0 netmask 255.255.255.0 {
+    range 192.168.2.2 192.168.2.250;
+}
+__EOF__
+</pre>
+<p><i>(optional)</i> Fix /etc/vim/vimrc.tiny</p>
+<pre>
+sed -i "s/set compatible/set nocompatible\nset term=xterm/g" /etc/vim/vimrc.tiny
+</pre>
+<p><i>(optional)</i> Intall bash-completion</p>
+<pre>
+apt-get install bash-completion
+</pre>
+<p><i>(optional)</i> Enable bash aliases</p>
+<pre>
+sed -i "s/# alias/alias/g" /root/.bashrc
+</pre>
+<p><i>(optional)</i> Set my favorite bash settings </p>
+<pre>
+cat &lt;&lt;__EOF__ &gt;&gt; /etc/inputrc
+
+# single tab auto-complete
+set show-all-if-ambiguous on
+
+# alternate mappings for "up" and "down" to search the history
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+__EOF__
+</pre>
+<p>Install local package dependency resolver</p>
+<pre>
+apt-get install gdebi-core
+</pre>
+<p>Get olimex-iot_1.0.1-1_all.deb package</p>
+<pre>
+wget https://iot.olimex.com/install/olimex-iot_1.0.1-1_all.deb -P /var/cache/
+</pre>
+<p>Install olimex-iot</p>
+<pre>
+gdebi /var/cache/olimex-iot_1.0.1-1_all.deb
+</pre>
+<p>
+<b>- Configuring olimex-iot -</b><br/>
+Set database password: <b>olimex</b><br/>
+Server name: <b>OlimexIoT</b><br/>
+Default server: <b>Yes</b><br/>
+NodeJS port: <b>8080</b><br/>
+Service name: <b>Olimex IoT Service</b><br/>
+email from: <b>iot@yourdomain.com</b><br/>
+New nodes: <b>auto</b><br/>
+<br/>
+Configure database for olimex-iot with dbconfig-common? <b>yes</b><br/>
+</p>
+<p>Exit from chroot</p>
+<pre>
+exit
+</pre>
+<p>Install kernel modules</p>
+<pre>
+cd ~/OlimexIoT/linux
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 INSTALL_MOD_PATH=~/OlimexIoT/rootfs modules_install
+</pre>
+<p>Pack rootfs to move it on HDD</p>
+<pre>
+cd ~/OlimexIoT/rootfs
+sudo tar czf rootfs.tgz *
+sudo wget https://iot.olimex.com/install/roofs2hdd -O root/rootfs2hdd
+sudo chmod 744 root/rootfs2hdd
+cd ~/OlimexIoT
+</pre>
+
+<!-- ======================================= SD-CARD ======================================= -->
+
+<a name="sd-card"></a>
+<h2>Prepare SD-card</h2>
+<p class="red"><b>NOTE</b> You MUST replace <b>/dev/sdX</b> with your card reader device, e.g. /dev/sdb OR /dev/sdc</p>
+<p>Plug your SD-card into your computer</p>
+<p>To determine your card reader device use following command</p>
+<pre>
+lsblk -d -o NAME,SIZE,TRAN,LABEL
+</pre>
+<p>Unmount partitions if there are any automounted</p>
+<pre>
+sudo umount <span class="red">/dev/sdX</span>*
+</pre>
+<p>Delete old partitions</p>
+<pre>
+sudo parted -s <span class="red">/dev/sdX</span> mktable msdos
+</pre>
+<p>Create boot partition</p>
+<pre>
+sudo parted -s -a optimal <span class="red">/dev/sdX</span> mkpart primary ext4 1 16MiB
+</pre>
+<p>Create rootfs partition</p>
+<pre>
+sudo parted -s -a optimal <span class="red">/dev/sdX</span> mkpart primary ext4 16MiB 100%
+</pre>
+<h3>Make ext4 file system</h3>
+<p>First check version of e2fsprogs package</p>
+<pre>
+dpkg -s e2fsprogs|grep Version
+</pre>
+<p>If your e2fsprogs package is version 1.43 or greater</p>
+<pre>
+sudo mkfs.ext4 -F -O ^metadata_csum,^64bit <span class="red">/dev/sdX</span>1
+sudo mkfs.ext4 -F -O ^metadata_csum,^64bit <span class="red">/dev/sdX</span>2
+</pre>
+<p>OR<br/>
+If your e2fsprogs package is version 1.42 or less</p>
+<pre>
+sudo mkfs.ext4 -F <span class="red">/dev/sdX</span>1
+sudo mkfs.ext4 -F <span class="red">/dev/sdX</span>2
+</pre>
+<h3>Putting it all together</h3>
+<p>Burn u-boot</p>
+<pre>
+sudo dd if=~/OlimexIoT/u-boot/u-boot-sunxi-with-spl.bin of=<span class="red">/dev/sdX</span> bs=1k seek=8
+</pre>
+<p>Mount SD-card partitions</p>
+<pre>
+sudo mkdir -p /mnt/boot
+sudo mkdir -p /mnt/sd
+
+sudo mount <span class="red">/dev/sdX</span>1 /mnt/boot
+sudo mount <span class="red">/dev/sdX</span>2 /mnt/sd
+</pre>
+<p>Install kernel</p>
+<pre>
+sudo cp ~/OlimexIoT/u-boot/boot*.scr /mnt/boot
+sudo cp ~/OlimexIoT/linux/arch/arm/boot/zImage /mnt/boot
+sudo cp ~/OlimexIoT/linux/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dtb /mnt/boot
+</pre>
+<p>Install rootfs</p>
+<pre>
+sudo cp -rvfp ~/OlimexIoT/rootfs/* /mnt/sd
+</pre>
+<p>Unmount SD-card</p>
+<pre>
+sync
+sudo eject <span class="red">/dev/sdX</span>
+</pre>
+
+<p>Continue with <a href="first-run.html">Starting the board for the first time</a></p>
+<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+
+</body>
+</html>

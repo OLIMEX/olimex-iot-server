@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Configuration</title>
+</head>
+
+<body>
+	<h1>OlimexIoT Configuration</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>
+		To access the configuration dialog you should be already logged in OlimexIoT Server 
+		and then click on configuration icon in the main screen  <img src="images/config.jpg" />.
+	</p>
+	<img src="images/config-00.jpg" />
+	
+	<p>Here you can change various service configuration parameters.</p>
+	
+	<a name="parameters"></a>
+	<h2>System</h2>
+	<p>
+		System configuration parameters can be modified only if you are logged in as administrator.
+		Otherwise they are shown as read-only.
+	</p>
+	<img src="images/config-01.jpg" />
+	<p><b>Service Name</b> - this name will be used in various e-mails send to the users.</p>
+	<p><b>e-mail from</b> - this is the e-mail from which e-mails will be send to the users.</p>
+	<p><b>Network configuration</b> - who can configure the network - <i>all users</i> or <i>admins only</i></p>
+	<p><b>Keep log [days]</b> - how long event log will be kept. If set to 0 no limit</p>
+	<p><b>Token size</b> - size of the token if manual token creation is used</p>
+	<p><b>Unknown nodes</b> - global policy for new nodes (nodes with unknown Token)</p>
+	
+	<a name="personal"></a>
+	<h2>Personal</h2>
+	<p>Personal configuration parameters can differ for each user.</p>
+	<p><b>New nodes</b> - personal policy for new nodes</p>
+	
+	<p>Continue with <a href="node-setup.html">Manual node setup</a></p>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

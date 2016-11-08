@@ -1,0 +1,25 @@
+#!/bin/sh
+
+#
+# Move specified temporary file as network configuration
+#
+
+if [ $# -ne 1 ]; then
+	echo "Wrong number of parameters"
+	exit 1
+fi
+
+if [ -f $1 ]; then
+	name=$(basename $1)
+	if [ $name = "interfaces" ]; then
+		cp $1 /etc/network/interfaces
+	else
+		cp $1 /etc/network/interfaces.d/
+	fi
+	
+	rm $1
+	echo "OK"
+else
+	echo "File $1 does not exist"
+	exit 1
+fi

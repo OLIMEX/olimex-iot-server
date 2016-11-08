@@ -1,0 +1,111 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 1.5;
+	color: black;
+}
+
+h2 {
+	color: green;
+	border-bottom: solid 1px green;
+}
+
+h3, h4 {
+	border-bottom: solid 1px lightgray;
+}
+
+h5 {
+	color: grey;
+	font-weight: normal;
+	text-align: right;
+	text-transform: uppercase;
+}
+
+a {
+	color: green;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img.ident {
+	display: block;
+	margin: 10px;
+}
+
+img.center {
+	display: block;
+	margin: 20px auto;
+}
+
+img.border {
+	border: solid 1px lightgray;
+}
+
+pre {
+	overflow-x: auto;
+}
+
+th {
+	background: lightgray;
+}
+
+td {
+	border-bottom: solid 1px lightgray;
+}
+
+tr:hover {
+	background: lightcyan;
+}
+
+blockquote {
+	font-style: italic;
+}
+
+blockquote.hint ,
+blockquote.info {
+	font-style: normal;
+}
+
+.fixme,
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+	font-weight: bold;
+}
+
+.orange {
+	color: orange;
+}
+
+.blue {
+	color: blue;
+}
+
+.win {
+	padding-left: 75px;
+	background: url("images/windows.png") no-repeat 5px 0px;
+	min-height: 70px;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.hint {
+	padding-left: 75px;
+	background: url("images/hint.png") no-repeat 0px 5px;
+	min-height: 75px;
+}
+
+.info {
+	padding-left: 75px;
+	background: url("images/info.png") no-repeat 5px 5px;
+	min-height: 75px;
+}

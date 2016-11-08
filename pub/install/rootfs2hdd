@@ -1,0 +1,101 @@
+#!/bin/sh
+
+user=$(whoami)
+if [ "$user" != "root" ]; then
+	echo "Need to be root. Try sudo $0 $@"
+	exit 1
+fi 
+
+if [ ! -f /rootfs.tgz ]; then
+	echo "ERROR: rootfs.tgz not found!"
+	exit 1
+fi
+
+HDD=/dev/sda
+
+if [ ! -e $HDD ]; then
+	echo "ERROR: $HDD not found!"
+	exit 1
+fi
+
+HDD_MOUNTS_COUNT=$(mount -v|egrep "^$HDD[0-9]+"|wc -l)
+if [ "$HDD_MOUNTS_COUNT" != "0" ]; then
+	echo "ERROR: There are $HDD_MOUNTS_COUNT partition(s) mounted!"
+	exit 1
+fi
+
+DIALOG_CANCEL=1
+DIALOG_ESC=255
+DIALOG_ASPECT=50
+DIALOG_HEIGHT=0
+DIALOG_WIDTH=0
+
+HDD_PARTITIONS_COUNT=$(fdisk -l $HDD |egrep "$HDD[0-9]+"|wc -l)
+PARTITION_MESSAGE=$(cat << __EOF__
+There are $HDD_PARTITIONS_COUNT partition(s) on $HDD.
+
+If you choose to continue ALL DATA on $HDD WILL BE LOST!
+
+Do you want to continue?
+__EOF__
+)
+
+
+do_dialog() {
+	export NCURSES_NO_UTF8_ACS=1
+	
+	TYPE=$1
+	MESSAGE=$2
+	
+	exec 3>&1
+	selection=$(dialog \
+		--title " Move rootfs " \
+		--aspect $DIALOG_ASPECT \
+		--clear \
+		--$TYPE "$MESSAGE" \
+		$DIALOG_HEIGHT $DIALOG_WIDTH \
+		2>&1 1>&3)
+	exit_status=$?
+	exec 3>&-
+	
+	if [ "$TYPE" != "msgbox" ] ; then 
+		if [ "$exit_status" = "$DIALOG_ESC" ] || [ "$exit_status" = "$DIALOG_CANCEL" ] || [ "$selection" = "0" ]; then
+			clear
+			echo "User cancelled."
+			exit 1
+		fi
+	fi
+}
+
+do_dialog yesno "Do you want to move rootfs to ${HDD}?"
+
+if [ "$HDD_PARTITIONS_COUNT" != "0" ]; then
+	do_dialog yesno "$PARTITION_MESSAGE"
+fi
+
+###  Delete partition data
+sudo parted -s $HDD mktable msdos
+
+###  Create new partition
+parted -s -a optimal $HDD -- mkpart primary ext4 1 100%
+
+### Make ext4 filesystem
+mkfs.ext4 -F ${HDD}1
+
+### Extract rootfs
+mount ${HDD}1 /mnt
+(pv -n /rootfs.tgz | tar xzf - -C /mnt ) \
+2>&1 | dialog --gauge "Extracting rootfs on ${HDD}1..." 6 50
+
+### Switch boot
+mv /boot/boot.scr /boot/boot-sd.scr
+mv /boot/boot-hdd.scr /boot/boot.scr
+sync
+umount /mnt
+
+### Reboot 
+do_dialog msgbox "The system will now reboot to apply changes!"
+clear
+echo "Rebooting..."
+reboot
+exit 0

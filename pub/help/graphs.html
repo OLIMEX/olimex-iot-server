@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Graph Reports</title>
+</head>
+
+<body>
+	<h1>Graph Reports</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>
+		You can access <b>Graph Reports</b> trough main screen or trough maximized device view.
+		Each numeric <a href="glossary.html#property">device property</a> has graph icon 
+		<img src="images/graph.png" /> on the right side. Click on the icon to see graph report 
+		for the property.
+	</p>
+	<img src="images/reports-00.jpg" />
+	
+	<p>Graph Report screen have to look like this</p>
+	<img src="images/reports-01.jpg" />
+	<p>There are four main areas</p>
+	<ul>
+		<li><a href="#title">Title area</a></li>
+		<li><a href="#graph">Graph area</a></li>
+		<li><a href="#navigation">Navigation area</a></li>
+		<li><a href="#graph">Legend area</a></li>
+	</ul>
+	
+	<a name="title"></a>
+	<h2>Title area</h2>
+	<p>
+		You can see node name and device for which report is generated as well as date for the report.
+		The <a href="#date-change">date can be changed</a> using navigation area.
+	</p>
+	
+	<a name="graph"></a>
+	<h2>Graph and Legend area</h2>
+	<p>
+		In Legend area you can see the name of the property for which report is generated and colors used
+		to display the graph. Basic color used to display the graph is <b class="green">green</b>. 
+		If there is something important some points are displayed in different color. 
+	</p>
+	<blockquote>
+		For example if change of property value caused <b><a href="#trigger-fire">trigger to fire</a></b>
+		corresponding point is colored in <b class="red">red</b>;<br/> 
+		If there is <b><a href="#reason-for-change">reason for change</a></b> of the value the 
+		corresponding point is colored in <b class="orange">orange</b>.
+	</blockquote>
+	
+	<a name="navigation"></a>
+	<h2>Navigation area</h2>
+	<p>Navigation can be done using icons, mouse or touch screen</p>
+	<table>
+		<tr>
+			<th>Icon</th>
+			<th>Mouse</th>
+			<th>Touch screen</th>
+		</tr>
+		<tr>
+			<td><img src="images/zoom-in.png" /> Zoom-in</td>
+			<td>Roll mouse wheel toward you</td>
+			<td><img src="images/ts-zoom-in.png" /> Two fingers swipe out</td>
+		</tr>
+		<tr>
+			<td><img src="images/zoom-out.png" /> Zoom-out</td>
+			<td>Roll mouse wheel away from you</td>
+			<td><img src="images/ts-zoom-out.png" /> Two fingers swipe in</td>
+		</tr>
+		<tr>
+			<td><img src="images/reset.png" /> Reset zoom</td>
+			<td>Right mouse click</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td><img src="images/left.png" /> Move left</td>
+			<td>Drag left</td>
+			<td>Swipe left</td>
+		</tr>
+		<tr>
+			<td><img src="images/right.png" /> Move right</td>
+			<td>Drag right</td>
+			<td>Swipe right</td>
+		</tr>
+		<tr>
+			<td><img src="images/calendar.png" /> Select date</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+	</table>
+	
+	<a name="date-change"></a>
+	<h3>Date change</h3>
+	<p>When you click on date change icon <img src="images/calendar.png" /> calnedar window will be open.</p>
+	<img src="images/reports-02.jpg" />
+	<p>
+		Report date is sown in <b class="red">red</b>. Current date is shown in <b class="blue">blue</b>.
+		To change the displayed month use <img src="images/left-button.png" /> and 
+		<img src="images/right-button.png" /> buttons. To change date click on desired date.
+	</p>
+	
+	<p>To see details for logged data move mouse over graph area.</p>
+	<img src="images/reports-03.jpg" />
+	
+	<p>You can lock current point by mouse click.</p>
+	<img src="images/reports-05.jpg" />
+	<p>When the point is locked the navigation using icons is changed a bit.</p>
+	<ul>
+		<li>All navigation using icons centers the view around locked point;</li>
+		<li>Left arrow click changes locked point to previous change of the value;</li>
+		<li>Right arrow click changes locked point to next change of the value;</li>
+		<li>Ctrl-Left arrow click changes locked point to previous important point;</li>
+		<li>Ctrl-Right arrow click changes locked point to next important point.</li>
+	</ul>
+	
+	<p>If the locked point is important additional information is shown under the graph area.</p>
+	<a name="trigger-fire"></a>
+	<blockquote>
+		In this example the locked point is important because value change caused trigger to fire
+		and to execute action <b>Relays.set</b> with parameters <b>node</b>=<b class="green">ESP_EVB</b> and 
+		<b>state</b>=<b class="green">0</b>
+	</blockquote>
+	<img src="images/reports-07.jpg" />
+	<p>To see report for caused change click on name of the property <i>(in this case <b>Relay</b>)</i>.</p>
+	<a name="reason-for-change"></a>
+	<blockquote>
+		In this example the you can see that the reason for change of state is change of value of 
+		<b>Temperature</b> property which caused trigger to fire and execute action <b>Relays.set</b> 
+		with parameters <b>node</b>&nbsp;=&nbsp;<b class="green">ESP_EVB</b> and 
+		<b>state</b>&nbsp;=&nbsp;<b class="green">0</b>
+	</blockquote>
+	<img src="images/reports-08.jpg" />
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

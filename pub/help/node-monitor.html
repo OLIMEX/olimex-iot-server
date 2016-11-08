@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Node Monitoring</title>
+</head>
+
+<body>
+	<h1>OlimexIoT Node Monitoring</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>
+		Log in into <b>OlimexIoT Server</b>. If you have alredy configured some nodes
+		you should see something like this:
+	</p>
+	<img src="images/monitor-01.jpg" />
+	
+	<p>Before moving forward you may want to read about <a href="node-manage.html">Node management</a>.</p>
+	
+	<p>
+		In the screenshot above we have two nodes <span class="green">ESP_EVB</span> and 
+		<span class="green">ESP_PLUG</span> and each node has several devices.
+		<span class="red nowrap">MOD-EMTR</span> device is highlighted in red because 
+		at this moment an event occurs.
+	</p>
+	
+	<p>You can see each node's <b>Name</b>, <b>IP Address</b> and <b>Token</b>.</p>
+	
+	<blockquote class="info">
+		If the node is behind NAT or proxy you will see its IP address.<br/>
+		More information for node's IP address is available at its menu <img src="images/menu.png" />
+		<a href="node-manage.html#info">Station info</a>
+	</blockquote>
+
+	<p>By clicking on device name we can expand the device's additional information.</p>
+	<img src="images/monitor-02.jpg" />
+	
+	<p>If the node is not connected it will be grayed. Note that we can still expand devices.</p>
+	<img src="images/monitor-03.jpg" class="center" />
+	
+	<p>If the connection with the node is lost you may see error code and message.</p>
+	<img src="images/monitor-04.jpg" class="center" />
+	
+	<p>
+		If there is too much information to be shown on main screen the maximize icon 
+		<img src="images/maximize.png" /> will be displayed. By clicking on the icon
+		you will see all information available for this device. Some additional devices 
+		can be shown if they are related to maximized device. 
+	</p>
+	<blockquote class="hint">
+		For example, if you maximize <span class="green">ESP_PLUG</span>'s <b>MOD-EMTR</b> device 
+		<b>RELAY</b> device will be shown as well so you can easily switch it on and off
+		and see how power consumption is changed.
+	</blockquote>
+	<img src="images/monitor-05.jpg" />
+	
+	<p>Continue with <a href="automation.html">Automation</a></p>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

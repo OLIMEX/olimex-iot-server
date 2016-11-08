@@ -1,0 +1,30 @@
+{
+	"short_name": "ESP8266 Setup",
+	"name": "ESP8266 Setup",
+	"icons": [
+		{
+			"src": "setup-192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "setup-128.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "setup-48.png",
+			"sizes": "48x48",
+			"type": "image/png"
+		},
+		{
+			"src": "setup-32.png",
+			"sizes": "32x32",
+			"type": "image/png"
+		}
+	],
+	"start_url": "index.html",
+	"display": "standalone",
+	"orientation": "portrait",
+	"permissions": ["http://*/"]
+}

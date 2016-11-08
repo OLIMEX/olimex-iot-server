@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="../images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="../images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="../images/olimex.png" />
+	
+	<link href="../layout.css" rel="stylesheet" type="text/css" />
+	<link href="../style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Configuration</title>
+</head>
+
+<body>
+	<h1>OlimexIoT configuration</h1>
+	
+	<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+	
+	<ul>
+		<li><a href="#admin">Admin user creation</a></li>
+		<li><a href="#ssl">SSL configuration</a></li>
+		<li><a href="#network">Network configuration</a></li>
+		<li><a href="#parameters">Service parameters configuration</a></li>
+		<li><a href="#nodes">Nodes configuration</a></li>
+	</ul>
+	
+	<p>
+		Make sure that your computer is connected to the board's Mini USB port using 
+		<a href="https://www.olimex.com/Products/Components/Cables/USB-MINI-CABLE/">USB mini cable</a>.
+	</p>
+	<p>
+		Open your favorite browser and navigate to 
+		<a href="http://192.168.2.1" target="_blank">http://192.168.2.1</a>
+	</p>
+	
+	<a name="admin"></a>
+	<h2>Admin user creation</h2>
+	<p>Fill admin user credentials</p>
+	<img src="images/config-01.jpg" />
+	
+	<a name="ssl"></a>
+	<h2>SSL Configuration</h2>
+	<p>
+		Copy and paste SSL certificate if you have one. <b>Private key</b>, <b>Certificate</b> and 
+		<b>CA Chain</b> have to be PEM encoded. Certificate have to match Server Name you entered during 
+		<a href="first-run.html#server-name">previous step</a>.
+	</p>
+	<p>You can skip this step and configure SSL later.</p>
+	<img src="images/config-02.jpg" />
+	
+	<a name="network"></a>
+	<h2>Configure your network</h2>
+	<p>You can skip this step and configure network later.</p>
+	<img src="images/config-03.jpg" />
+	
+	<ol>
+		<li>Click on interface name to configure it</li>
+		<li>If you want interface to be active after reboot check <span class="green">Auto</span></li>
+		<li>You can choose between
+			<ul>
+				<li>DHCP<br/>
+				<i>if interface is up and DHCP is working assigned IP address and Network Mask will be shown</i>
+				</li>
+				<li>Manual configuration<br/>
+				<i>if you choose this you have to enter IP address and network mask</i>
+				</li>
+			</ul>
+		</li>
+		<li>If interface is WiFi you should enter Access Point's SSID and PSK to connect to</li>
+		<li>Click on <span class="green">Apply</span> button</li>
+		<li>You can repeat this for all interfaces</li>
+		<li>Click <span class="green">Continue</span> button when you are ready</li>
+	</ol>
+	<img src="images/config-04.jpg" />
+	
+	<a name="parameters"></a>
+	<h2>Service parameters configuration</h2>
+	<p>
+		Change service configuration parameters. This can be done later. 
+		You can read detailed parameters description <a href="../config.html#parameters">here</a>.
+	</p>
+	<img src="images/config-05.jpg" />
+	
+	<a name="nodes"></a>
+	<h2>ESP8266 nodes configuration</h2>
+	<p class="red">
+		<b>NOTE</b> If your <a target="_blank" href="https://www.olimex.com/Products/USB-Modules/MOD-WIFI-R5370/">MOD-WIFI-R5370</a>
+		is not plugged into the board this step will be skipped!
+	</p>
+	<p>
+		Here you can configure ESP8266 nodes running our IoT Firmware (reset to factory default settings).
+		Server will try to connect to the nodes' access point and configure them to report events.
+		You can read more detailed explanation <a href="../auto-setup.html#procedure">here</a>.
+	</p>
+	<p>You can skip this step and configure your nodes at later stage.</p>
+	<img src="images/config-06.jpg" />
+	
+	<a name="done"></a>
+	<h2>Congratulations...</h2>
+	<p>Your IoT server is ready to operate.</p>
+	<img src="images/config-07.jpg" />
+	
+	<p>
+		Continue with <a href="../auto-setup.html">Automated ESP8266 Node Setup</a> or
+		<a href="../node-setup.html">Manual node setup</a>
+	</p>
+	
+	<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+</body>
+</html>

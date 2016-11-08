@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Triggers</title>
+</head>
+
+<body>
+	<h1>Triggers</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>
+		A trigger is a condition, that causes <a href="actions.html">Action</a> to take place, when met.
+		Triggers can be created by the plugins or by the user. User-created triggers can be enabled, disabled
+		and edited by the user while plugin-created ones can not. Admin user can create triggers which are 
+		system wide (valid for all users). These triggers can not be modified by regular users.
+		They can create triggers valid only for themselves.
+	</p>
+	
+	<p>Triggers are accessible from the main screen - click on the trigger icon <img src="images/triggers.png" />.</p>
+	<img src="images/triggers-00.jpg" />
+	
+	<a name="manage"></a>
+	<h2>Triggers management</h2>
+	<p>
+		Plugin or admin created triggers are shown in black, disabled - in red, active in blue color.
+		To manage a trigger use its menu <img src="images/menu.png" />.
+	</p>
+	<img src="images/triggers-01.jpg" />
+	
+	<p>
+		Click on trigger description to view detailed information about the parameter values 
+		passed to the action.
+	</p>
+	<img src="images/triggers-02.jpg" />
+	
+	<p>To add a new trigger click on the + sign located in the upper right corner.</p>
+	<img src="images/triggers-03.jpg" />
+	
+	<h2>New trigger creation</h2>
+	<p>To create new trigger you should</p>
+	<ol>
+		<li><a href="#condition-type">Choose condition type</a></li>
+		<li><a href="#action">Choose action to be executed</a></li>
+	</ol>
+	
+	<a name="condition-type"></a>
+	<p>There are three kinds of triggers</p>
+	<ul>
+		<li>
+			<a href="#event">Event driven</a>
+			<ul>
+				<li><a href="#onRegisterDevice">onRegisterDevice</a></li>
+				<li><a href="#onConnectionClose">onConnectionClose</a></li>
+				<li><a href="#onPropertyChange">onPropertyChange</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#time">Time scheduled</a>
+			<ul>
+				<li><a href="#everyMinute">everyMinute</a></li>
+				<li><a href="#everyHour">everyHour</a></li>
+				<li><a href="#everyDay">everyDay</a></li>
+				<li><a href="#everyMonth">everyMonth</a></li>
+				<li><a href="#everyYear">everyYear</a></li>
+			</ul>
+		</li>
+		<li><a href="#raw">Raw</a></li>
+	</ul>
+	
+	<p>
+		Depending on what condition type you choose there are different parameters to define the condition.
+	</p>
+	
+	<a name="event"></a>
+	<h2>Event driven triggers</h2>
+	<ul>
+		<li><a href="#onRegisterDevice">onRegisterDevice</a></li>
+		<li><a href="#onConnectionClose">onConnectionClose</a></li>
+		<li><a href="#onPropertyChange">onPropertyChange</a></li>
+	</ul>
+	
+	<a name="onRegisterDevice"></a>
+	<h3>onRegisterDevice</h3>
+	<p>
+		This event occurs when the IoT Node connects to the IoT Server for the first time or
+		after connection drop. After successful authentication the server requests information
+		about discovered IoT Devices connected to the node. The response is used to register the
+		reported devices.
+	</p>
+	<p>
+		To define the condition you should choose the <b>Node</b> and the <b>Device</b> for which the 
+		trigger will fire. You can use <b>All nodes</b> and <b>All devices</b> options to fire trigger
+		no matter of what is particular node or device.
+	</p>
+	<img src="images/triggers-04.jpg" />
+	
+	<a name="onConnectionClose"></a>
+	<h3>onConnectionClose</h3>
+	<p>
+		This event occurs when an established connection between IoT Node and IoT Server is lost.
+	</p>
+	<p>
+		To define the condition you should choose the <b>Node</b> for which the 
+		trigger will fire. You can use <b>All nodes</b> option to fire trigger
+		no matter of what is particular node is.
+	</p>
+	<img src="images/triggers-05.jpg" />
+	
+	<a name="onPropertyChange"></a>
+	<h3>onPropertyChange</h3>
+	<p>This event occurs when an device property changes its value.</p>
+	<p>
+		To define the condition you should choose the <b>Node</b> and the <b>Property</b> for which the 
+		trigger will fire. You can use <b>All nodes</b> option to fire trigger no matter of what is 
+		particular node.
+	</p>
+	<img src="images/triggers-06.jpg" />
+	<p>
+		In addition you can specify comparison operation by selecting <b>Operator</b> and <b>Value</b>.
+		if <b>Operator</b> and <b>Value</b> are left empty any change will cause trigger to fire.
+	</p>
+	<blockquote>
+		For example this trigger will fire for <b>All nodes</b> having <b>MOD-EMTR</b> device when the 
+		value reported for <b>VoltageRMS</b> property is greater than <b>250</b>.
+		<img src="images/triggers-07.jpg" class="center" />
+	</blockquote>
+	
+	<p>
+		It is possible to apply a <a href="filters.html">Filter</a> over the property value.
+		Depending on selected filter different parameters might be required.
+	</p>
+	<img src="images/filters-02.jpg" class="center" />
+	
+	<a name="time"></a>
+	<h2>Time scheduled triggers</h2>
+	<ul>
+		<li><a href="#everyMinute">everyMinute</a></li>
+		<li><a href="#everyHour">everyHour</a></li>
+		<li><a href="#everyDay">everyDay</a></li>
+		<li><a href="#everyMonth">everyMonth</a></li>
+		<li><a href="#everyYear">everyYear</a></li>
+	</ul>
+	
+	<a name="everyMinute"></a>
+	<h3>everyMinute</h3>
+	<p>This trigger will fire once every minute.</p>
+	<img src="images/triggers-08.jpg" />
+	
+	<a name="everyHour"></a>
+	<h3>everyHour</h3>
+	<p>This trigger will fire once every hour.</p>
+	<p>To define the condition you should choose at which minute the trigger will fire.</p>
+	<img src="images/triggers-09.jpg" />
+	
+	<a name="everyDay"></a>
+	<h3>everyDay</h3>
+	<p>This trigger will fire once every day.</p>
+	<p>
+		To define the condition you should choose at which hour and minute the trigger will fire.
+		You can specify the trigger to be fired on certain week days.
+	</p>
+	<img src="images/triggers-10.jpg" />
+	
+	<a name="everyMonth"></a>
+	<h3>everyMonth</h3>
+	<p>This trigger will fire once every month.</p>
+	<p>
+		To define the condition you should choose at which day, hour and minute the trigger will fire.
+		There is a special value <b>Last day</b> to match last day of the month.
+	</p>
+	<blockquote>
+		For example if you choose every <b>31</b> day of the month instead of <b>Last day</b> the trigger 
+		will never fire in february.
+	</blockquote>
+	<img src="images/triggers-11.jpg" />
+	
+	<a name="everyYear"></a>
+	<h3>everyYear</h3>
+	<p>This trigger will fire once per year.</p>
+	<p>
+		To define the condition you should choose at which month, day, hour and minute the trigger will fire.
+	</p>
+	<img src="images/triggers-12.jpg" />
+	
+	<a name="raw"></a>
+	<h2>Raw triggers</h2>
+	<p></p>
+	
+	<a name="action"></a>
+	<h2>Action</h2>
+	<p>Select an action to be executed when the trigger fires.</p>
+	<img src="images/triggers-13.jpg" class="center" />
+	
+	<p>Depending on which action you choose different set of parameters will be shown.</p>
+	<img src="images/triggers-14.jpg" class="center" />
+	
+	<p>There are some parameter value special input types</p>
+	
+	<h3>Node selector</h3>
+	<img src="images/triggers-15.jpg" />
+	<p>
+		There is a special value <b>- Event Node -</b>. It is used when condition is met for <b>All nodes</b>
+		and we want action to use the node which emits the event.
+	</p>
+	
+	<h3>Property selector</h3>
+	<img src="images/triggers-16.jpg" />
+	<p>
+		If we want some of device property values to be part of the parameter value we include property name
+		in square brackets. This input allows to easily select corresponding properties. Just position cursor
+		where you want value to be displayed and click on light bulb on the right. Then select
+		property you want to use.
+	</p>
+	<p>
+		Properties shown in green color are specific for the device selected in condition section above. 
+		Properties in black are present for all devices.
+	</p>
+	<p>It is possible to combine more than one property value in the same parameter.</p>
+	<blockquote>
+		When the example trigger below fires user will receive an e-mail looking like<br/>
+		Subject: <b>Lost connection to ESP_PLUG</b> <br/>
+		Message Body: <b>Connection close - 1001: Rebooting</b>
+	</blockquote>
+	<img src="images/triggers-17.jpg" />
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

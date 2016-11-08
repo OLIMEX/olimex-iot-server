@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Node Management</title>
+</head>
+
+<body>
+	<h1>OlimexIoT Node Management</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>Node management is accessible via node menu.</p>
+	<ul>
+		<li><a href="#reconnect">Reconnect</a></li>
+		<li><a href="#restart">Restart</a></li>
+		<li><a href="#edit">Edit node</a></li>
+		<li><a href="#delete">Delete node</a></li>
+		<li><a href="#info">Station info</a></li>
+		<li><a href="#about">About</a></li>
+	</ul>
+	<img src="images/manage-01.jpg" class="center" />
+	
+	<a name="reconnect"></a>
+	<h2>Reconnect</h2>
+	<p>Drop node's connection i.e. node is forced to re-establish connection to the <b>IoT Server</b>.</p>
+	<img src="images/manage-02.jpg" class="center" />
+	
+	<a name="restart"></a>
+	<h2>Restart</h2>
+	<p>The node is forced to restart and re-connect to the <b>IoT Server</b>.</p>
+	<img src="images/manage-03.jpg" class="center" />
+	
+	<a name="edit"></a>
+	<h2>Edit node</h2>
+	<p>Change the name of the node.</p>
+	<img src="images/manage-04.jpg" />
+	
+	<a name="delete"></a>
+	<h2>Delete node</h2>
+	<p>
+		If the node you are deleting is connected to the <b>IoT Server</b> its firmware 
+		will be reset to factory default. This will delete all credentials from the node
+		and will prevent it to re-connect to the server at later stage.
+	</p>
+	<p>
+		If the node is not connected all credentials will remain stored into the node's firmware.
+		This will cause the node to try to reconnect to the server when is back on. If <a href="config.html#personal">your
+		policy</a> is to auto accept new nodes&nbsp;- deleted node will re-appear in your main screen.
+	</p>
+	<img src="images/manage-05.jpg" />
+	
+	<a name="info"></a>
+	<h2>Station info</h2>
+	<p>Basic WiFi station and network information.</p>
+	<img src="images/manage-06.jpg" />
+	
+	<a name="about"></a>
+	<h2>About</h2>
+	<p>IoT node's system information.</p>
+	<img src="images/manage-07.jpg" />
+	
+	
+	<p>Continue with <a href="node-monitor.html">Node monitoring</a></p>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+	"name": "olimex-iot-server",
+	"version": "1.0.0",
+	"description": "WebSocket Olimex IoT Server",
+	"dependencies": {
+		"advanced-json-path": "~1.0.4",
+		"express": "~4.13.1",
+		"basic-auth": "~1.0.3",
+		"body-parser": "~1.13.2",
+		"websocket": "~1.0.19",
+		"node-tweet-stream": "~1.8.2",
+		"pg": "~4.4.4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/OLIMEX/ESP8266/tree/master/IoT Server"
+	},
+	"license" : "Apache-2.0",
+	"private": false
+}

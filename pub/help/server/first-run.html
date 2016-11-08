@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="../images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="../images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="../images/olimex.png" />
+
+	<link href="../layout.css" rel="stylesheet" type="text/css" />
+	<link href="../style.css"  rel="stylesheet" type="text/css" />
+
+	<title>Olimex IoT - Starting the board for the first time</title>
+</head>
+
+<body>
+<h1>Starting the board for the first time</h1>
+<p>
+If you want to know how the image was made check 
+<a href="build.html">How to build image for OlimexIoT server</a>
+or go back to <a href="index.html">How to install OlimexIoT server</a>
+</p>
+
+<ul>
+	<li><a href="#power-on">Power on the board</a></li>
+	<li><a href="#rootfs-to-hdd">Move rootfs to hard disk</a></li>
+	<li><a href="#passwd">Change passwords</a></li>
+	<li><a href="#keys">Regenerate security keys</a></li>
+	<li><a href="#time">Set timezone</a></li>
+	<li><a href="#mta">Configure MTA</a></li>
+	<li><a href="#iot">Configure Olimex IoT</a></li>
+</ul>
+
+<a name="power-on"></a>
+<h2>Power on the board</h2>
+<p>
+Put the card into the board and power it. Connect your computer to the board's mini USB port using 
+<a href="https://www.olimex.com/Products/Components/Cables/USB-MINI-CABLE/" target="_blank">USB mini cable</a>.
+</p>
+<blockquote class="win">
+If Windows does not recognize board connection as <b>USB Ethernet&nbsp;/&nbsp;RNDIS Gadget</b> you may 
+need to install Windows RNDIS drivers.
+</blockquote>
+<p>Log in using your favorite SSH client. Board address is <span class="green">192.168.2.1</span>.</p>
+<pre>
+login as: <b>olimex</b>
+olimex@192.168.2.1's password: <b>olimex</b>
+</pre>
+<p>Switch to root</p>
+<pre>
+sudo su -
+</pre>
+<p>You will be prompted for olimex password. Use <b>olimex</b></p>
+
+<a name="rootfs-to-hdd"></a>
+<h2>Move rootfs to hard disk</h2>
+<p>
+It is highly recommended to use hard disk because of intensive database operations which may
+reduce SD-card lifespan.
+<p>
+<p><i>(recommended)</i> Move rootfs to hard disk.</p>
+<pre>
+~/rootfs2hdd
+</pre>
+<img src="images/move-01.jpg" />
+<img src="images/move-02.jpg" />
+<img src="images/move-03.jpg" />
+<img src="images/move-04.jpg" />
+<p>If successful this command will reboot the board.</p>
+
+<a name="passwd"></a>
+<h2>Change passwords</h2>
+<p>After reboot login again</p>
+<pre>
+login as: <b>olimex</b>
+olimex@192.168.2.1's password: <b>olimex</b>
+</pre>
+<p>Switch to root</p>
+<pre>
+sudo su -
+</pre>
+<p>You will be prompted for olimex password. Use <b>olimex</b></p>
+<p><i class="green">(mandatory)</i> Change olimex password</p>
+<pre>
+passwd olimex
+</pre>
+<p><i class="green">(mandatory)</i> Change root password</p>
+<pre>
+passwd root
+</pre>
+
+<a name="keys"></a>
+<h2>Regenerate security keys</h2>
+<p>Set date and time in format YYYY-MM-DD HH:MI</p>
+<pre>
+date -s "2016-10-20 14:20"
+</pre>
+<p><i class="green">(mandatory)</i> Regenerate default SSH keys</p>
+<pre>
+rm -f /etc/ssh/ssh_host_*
+dpkg-reconfigure openssh-server
+</pre>
+<p><i class="green">(mandatory)</i> Regenerate default SSL certificate</p>
+<pre>
+make-ssl-cert generate-default-snakeoil --force-overwrite
+</pre>
+<a name="time"></a>
+<h2>Set timezone</h2>
+<pre>
+dpkg-reconfigure tzdata
+</pre>
+<p>Time zone shown on screen shots is for Bulgaria. You should choose yours.</p>
+<img src="images/time-01.jpg" />
+<img src="images/time-02.jpg" />
+
+<a name="mta"></a>
+<h2>Configure postfix MTA</h2>
+<pre>
+dpkg-reconfigure postfix
+</pre>
+<img src="images/mta-01.jpg" />
+<p>
+Select <b>Satellite system</b><br/>
+<i>This will allow to configure SMTP relay only (recommended)</i>
+</p>
+<img src="images/mta-02.jpg" />
+<img src="images/mta-03.jpg" />
+<img src="images/mta-04.jpg" />
+<img src="images/mta-05.jpg" />
+<img src="images/mta-06.jpg" />
+<img src="images/mta-07.jpg" />
+<img src="images/mta-08.jpg" />
+<img src="images/mta-09.jpg" />
+<img src="images/mta-10.jpg" />
+<img src="images/mta-11.jpg" />
+
+<p>Reload postfix to apply changes</p>
+<pre>
+service postfix reload
+</pre>
+
+<a name="iot"></a>
+<h2>Configure OlimexIoT</h2>
+<pre>
+dpkg-reconfigure olimex-iot
+</pre>
+<img src="images/iot-01.jpg" />
+<a name="server-name"></a>
+<p>
+If you are planning to use SSL (which is highly recommended) 
+<span class="green">Server name</span> have to match your SSL certificate.
+</p>
+<img src="images/iot-02.jpg" />
+<img src="images/iot-03.jpg" />
+<img src="images/iot-04.jpg" />
+<img src="images/iot-05.jpg" />
+<img src="images/iot-06.jpg" />
+<img src="images/iot-07.jpg" />
+
+<p>To follow the log messages use</p>
+<pre>
+journalctl -f -o cat -u olimex-iot.service -u nginx.service
+</pre>
+
+<p>Continue with <a href="config.html">Configuration</a></p>
+<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+
+</body>
+</html>

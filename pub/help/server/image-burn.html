@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="../images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="../images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="../images/olimex.png" />
+	
+	<link href="../layout.css" rel="stylesheet" type="text/css" />
+	<link href="../style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - How to burn image</title>
+</head>
+
+<body>
+<h1>How to burn image for OlimexIoT server</h1>
+<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+
+<h2>Download image</h2>
+<p><a href="#" class="fixme"><img src="images/diskette.png" /> OlimexIoT Server - A20-OLinuXino-MICRO Image</a></p>
+
+<h2>SD Card requirements</h2>
+<ul>
+	<li>Class 10</li>
+</ul>
+
+<h2>Linux</h2>
+<p class="red"><b>NOTE</b> You MUST replace <b>/dev/sdX</b> with your card reader device, e.g. /dev/sdb OR /dev/sdc</p>
+<p>Plug your SD-card into your computer</p>
+<p>To determine your card reader device use following command</p>
+<pre>
+lsblk -d -o NAME,SIZE,TRAN,LABEL
+</pre>
+<p>Unmount partitions if there are any automounted</p>
+<pre>
+sudo umount <span class="red">/dev/sdX</span>*
+</pre>
+<p>To burn image use following command</p>
+<pre>
+sudo dd bs=4M oflag=sync if=OlimexIoT.img of=<span class="red">/dev/sdX</span>
+</pre>
+
+<h2>Windows</h2>
+<p>
+	To write a Linux image to an SD card under Windows you can use <b>Win32 Disk Imager</b>.
+</p>
+<ol>
+<li>
+	<a href="https://sourceforge.net/projects/win32diskimager/" target="_blank"><img src="images/diskette.png" /> Download Win32 Disk Imager</a> 
+	and install it.
+</li>
+<li>Run the program</li>
+<img src="images/burn-01.jpg" class="center" />
+<li>Select image file you have downloaded and SD card device.</li>
+<li>Click on <span class="green">Write</span> button.</li>
+</ol>
+
+<p>Continue with <a href="first-run.html">Starting the board for the first time</a></p>
+<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+</body>
+</html>

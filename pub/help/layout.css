@@ -1,0 +1,80 @@
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	
+	margin: 0; 
+	padding: 0;
+}
+
+body {
+	padding: 20px;
+	width: 710px;
+	margin-left: auto;
+	margin-right: auto;
+	border: solid 1px black;
+}
+
+p, h2, h3, h4 {
+	margin-top: 20px;
+}
+
+div {
+	display: inline-block;
+	vertical-align: top;
+	width: 320px;
+	margin-right: 20px;
+}
+
+div.right {
+	margin-right: 0px;
+}
+
+blockquote {
+	padding: 10px;
+	margin-top: 10px;
+	border: dotted 1px black;
+	background-color: #EEEEEE !important;
+}
+
+blockquote p:first-child {
+	margin-top: 0px;
+}
+
+ul, ol  {
+	margin-top: 10px;
+}
+
+ul ul, 
+ul ol, 
+ol ul, 
+ol ol  {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+li {
+	margin-left: 20px;
+}
+
+pre {
+	margin-bottom: 20px;
+	padding: 5px 10px;
+	border: solid 1px grey;
+	background: #EEEEEE;
+}
+
+img {
+	margin-top: 10px;
+}
+
+li img,
+p img,
+td img,
+blockquote img {
+	margin: 0;
+	vertical-align: middle;
+}
+
+table {
+	width: 100%;
+}

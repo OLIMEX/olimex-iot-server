@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Help</title>
+</head>
+
+<body>
+	<h1>OlimexIoT Help</h1>
+	
+	<h2>What is OlimexIoT</h2>
+	<p>According to Wikipedia <span class="green">Internet Of Things</span> (IoT) is</p>
+	<blockquote>
+		<p>
+		...the internetworking of physical devices, vehicles 
+		(also referred to as "connected devices" and "smart devices"), buildings and 
+		other items—embedded with electronics, software, sensors, actuators, and 
+		network connectivity that enable these objects to collect and exchange data.
+		</p>
+		<p>
+		The IoT allows objects to be sensed and/or controlled remotely across existing 
+		network infrastructure, creating opportunities for more direct integration of 
+		the physical world into computer-based systems, and resulting in improved 
+		efficiency, accuracy and economic benefit.
+		</p>
+	</blockquote>
+	
+	<p>
+		<b>OlimexIoT</b> is our attempt to create an easy-to-use Open-source software (OSS) and 
+		Open-source hardware (OSHW) low cost do-it-yourself (DIY) internet-of-things (IoT) 
+		platform. The main goal is to use well known technologies. This allows extending 
+		and integration to be easy achievable.
+	</p>
+	
+	<h2>Technology</h2>
+	<p>
+		<b>OlimexIoT</b> is based on exchanging asynchronous JSON Messages between 
+		<a href="glossary.html#node">IoT Nodes</a> and <a href="glossary.html#server">IoT Server</a> 
+		through WebSockets or HTTP POST requests.
+	</p>
+	
+	<p>
+		<b>WebSockets</b> allows bi-directional communication between the node and the server
+		and is easy (by design) to pass through NAT Firewalls and Proxy Servers.
+	</p>
+	
+	<p>
+		<b>HTTP POST requests</b> can be used in the case there is no need of bi-directional 
+		communication.
+	</p>
+	
+	<h2>OlimexIoT conceptual schemes</h2>
+	
+	<h3>Using our free <b>OlimexIoT Service</b></h3>
+	<p>
+		Each <b>IoT Node</b> builds separate connection to <b>OlimexIoT Service</b>. Node's firmware
+		have to be build with SSL support. Client connects to the service to monitor the nodes.
+		Direct connection to the nodes from outside is not possible.
+	</p>
+	<img src="images/OlimexIoT-01.jpg" class="border" />
+	<div>
+		<h4>Pros</h4>
+		<ul>
+			<li>Quick start</li>
+			<li>Easy to setup</li>
+			<li>You don't need to maintain own server</li>
+		</ul>
+	</div>
+	<div class="right">
+		<h4>Cons</h4>
+		<ul>
+			<li>Requires constant internet connection</li>
+			<li>
+				<b>Your private</b> data is on <b>our public</b> server&nbsp;-
+				if you are paranoid <img src="images/wink.png" />
+			</li>
+		</ul>
+	</div>
+	<p>See <a href="service.html">How to use our free <b>OlimexIoT Service</b></a></p>
+	
+	<h3>Build your own <b>OlimexIoT Server</b></h3>
+	<p>
+		Direct connection between <b>IoT Nodes</b> and <b>IoT Server</b> via existing wireless 
+		network. Firmware SSL support is not required. 
+		Possible scenarios for clients:
+	</p>
+	<div>
+		<h4>Direct IoT Server connection</h4>
+		<p>
+			Client have to be able to connect to the server so firewall have to be configured 
+			to allow outside connections to the server. You will need:
+		</p>
+		<ul>
+			<li>Static IP address</li>
+			<li>Fully Qualified Domain Name (FQDN)</li>
+			<li>SSL certificate for the server</li>
+		</ul>
+		<p>Direct connection to the nodes from outside is not possible.</p>
+	</div>
+	<div class="right">
+		<h4>VPN Tunnel</h4>
+		<p>If you have VPN to your place then there is no need of SSL certificate.</p>
+		<ol>
+			<li>Connect your device to your place VPN. This will provide secure encrypted connection.</li>
+			<li>Use internal IP address of the server to connect.</li>
+		</ol>
+		<p>This is the only scenario which allows direct connection to the nodes from outside.</p>
+	</div>
+	<img src="images/OlimexIoT-02.jpg" class="border" />
+	<div>
+		<h4>Pros</h4>
+		<ul>
+			<li>Independent</li>
+			<li>Customizable to fit your exact needs</li>
+		</ul>
+	</div>
+	<div class="right">
+		<h4>Cons</h4>
+		<ul>
+			<li>Steep learning curve</li>
+			<li>You should know what are you doing</li>
+		</ul>
+	</div>
+	<p>See <a href="server/index.html">Build your own <b>OlimexIoT Server</b></a></p>
+	
+	<h2>OlimexIoT Products</h2>
+	<ul>
+		<li><a href="#">ESP8266-PLUG</a></li>
+		<li><a href="#">ESP8266-SWITCH1</a></li>
+		<li><a href="#">ESP8266-SWITCH2</a></li>
+		<li><a href="#">ESP8266-DIMMER</a></li>
+		<li><a target="_blank" href="https://www.olimex.com/Products/IoT/ESP8266-EVB/open-source-hardware">ESP8266-EVB</a></li>
+		<li><a target="_blank" href="https://www.olimex.com/Products/IoT/ESP8266-EVB-BAT/open-source-hardware">ESP8266-EVB-BAT</a></li>
+	</ul>
+	
+	
+	<h2>Olimex IoT Server</h2>
+	<p>Based on your experience you can choose between</p>
+	<ul>
+		<li><a href="service.html">Use our free <b>OlimexIoT Service</b></a></li>
+		<li><a href="server/index.html">Build your own <b>OlimexIoT Server</b></a></li>
+		<br/>
+		<li><a href="config.html">OlimexIoT Configuration</a></li>
+	</ul>
+	
+	<h2>IoT Nodes management</h2>
+	<ul>
+		<li><a href="node-setup.html">Manual node setup</a></li>
+		<li><a href="auto-setup.html">Automated nodes setup</a></li>
+		<li><a href="node-manage.html">Node management</a></li>
+	</ul>
+	
+	<h2>IoT Node monitoring</h2>
+	<ul>
+		<li><a href="node-monitor.html">Via Olimex IoT Server</a></li>
+		<li><a href="node-direct.html">Direct node connection</a></li>
+	</ul>
+	
+	<h2><a href="automation.html">Automation</a></h2>
+	<ul>
+		<li><a href="actions.html">Actions</a></li>
+		<li><a href="triggers.html">Triggers</a></li>
+	</ul>
+	
+	<h2>Reports</h2>
+	<ul>
+		<li><a href="graphs.html">Graph Reports</a></li>
+		<li><a href="log.html">Trigger Log</a></li>
+	</ul>
+	
+	
+	<h2>Integration with other platforms</h2>
+	<p><b>OlimexIoT</b> can be easily integrated with other platforms if they can handle web requests.</p>
+	<ul>
+		<li><a href="integration.html#out">Send web request</a></li>
+		<li><a href="integration.html#in">Receive web request</a></li>
+	</ul>
+	
+	<h2>OlimexIoT Glossary</h2>
+	<ul>
+		<li><a href="glossary.html#action">Action</a></li>
+		<li><a href="glossary.html#device">Device</a></li>
+		<li><a href="glossary.html#filter">Filter</a></li>
+		<li><a href="glossary.html#node">Node</a></li>
+		<li><a href="glossary.html#server">Server</a></li>
+		<li><a href="glossary.html#trigger">Trigger</a></li>
+	</ul>
+	
+</body>
+</html>

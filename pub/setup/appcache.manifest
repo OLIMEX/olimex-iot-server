@@ -1,0 +1,14 @@
+CACHE MANIFEST
+# 2016-10-10 v1.0.0
+manifest.json
+jquery-1.11.3.min.js
+lib.js
+setup.js
+style.css
+setup-192.png
+setup-128.png
+setup-48.png
+setup-32.png
+
+NETWORK:
+*

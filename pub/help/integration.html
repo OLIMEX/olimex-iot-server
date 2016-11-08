@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Integration</title>
+</head>
+
+<body>
+	<h1>Integration</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<a name="out"></a>
+	<h2>Send web request</h2>
+	<p>
+		Sending web request is done using <a href="actions.html">Actions</a> and 
+		<a href="triggers.html">Triggers</a>. At the moment we have implemented (as an example) integration
+		with <a target="_blank" href="https://ifttt.com/maker">IFTTT Maker</a> channel.
+	</p>
+	
+	<h3>IFTTT Maker channel integration</h3>
+	<p>First you should enter your IFTTT Maker Key in OlimexIoT configuration dialog.</p>
+	<img src="images/integration-01.jpg" />
+	<p>Then you should create new trigger with action <b>IFTTT.Maker.event</b></p>
+	<blockquote>
+		For example, the trigger bellow will send request for a <b>button</b> event to IFTTT site 
+		every time the button on IoT Device is pressed. The token of the node will be send as <b>value1</b>
+	</blockquote>
+	<img src="images/integration-02.jpg" />
+	
+	<a name="in"></a>
+	<h2>Receive web request</h2>
+	<p>Before sending web requests to <b>OlimexIoT Server</b> consider following</p>
+	<ul>
+		<li>
+			<b>Always use HTTPS for your requests</b> if there is a public network between OlimexIoT Server and 
+			the host making request.
+		</li>
+		<li>
+			<b>Keep your API Key secret</b> - it is equivalent to your user name and password.
+		</li>
+	</ul>
+	<img src="images/integration-03.jpg" />
+	
+	<p>
+		Make POST request to 
+<pre>
+https://<b>&lt;your-host-name&gt;</b>/clients/api-key/<b>&lt;api-key&gt;</b>
+</pre>
+		with JSON body in format
+<pre>
+{
+	"Action": "",
+	"Parameters": {
+		"name1": value1,
+		"name2": value2,
+		...
+		"nameN": valueN
+	}
+}
+</pre>
+	</p>
+	
+	<p>If you want to switch your <span class="green">ESP_PLUG</span> relay <b>on</b> using curl your request should look like</p>
+<pre>
+curl \
+    -H "Content-Type: application/json" \
+    -X POST \
+    -d '{"Action": <b>"Relays.set"</b>, "Parameters": {"node": <b>"ESP_PLUG"</b>, "state": <b>1</b>}}' \
+    https://<b>iot.olimex.com</b>/clients/api-key/<b>ABCDEFGHIJKLMNOPQRSTUVWXY1234567890abcdefghijklmnopqrstuvwxyz</b>
+
+</pre>
+	
+	<p>And the response</p>
+<pre>
+{"Status":"OK"}
+</pre>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>

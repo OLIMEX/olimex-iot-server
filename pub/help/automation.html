@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="images/olimex.png" />
+	
+	<link href="layout.css" rel="stylesheet" type="text/css" />
+	<link href="style.css"  rel="stylesheet" type="text/css" />
+	
+	<title>Olimex IoT - Automation</title>
+</head>
+
+<body>
+	<h1>Automation</h1>
+	
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+	
+	<p>
+		IoT Node connected to the <b>OlimexIoT Server</b> sends a message to the server for 
+		each event that occurred. These messages are used to monitor and store the state of 
+		IoT Devices. On the other hand some events may occur on the server itself.
+	</p>
+	
+	<p>
+		This approach gives <b>OlimexIoT Server</b> the ability to achieve certain level of 
+		automation trough two main features.
+	</p>
+	<ul>
+		<li><a href="actions.html">Actions</a></li>
+		<li><a href="triggers.html">Triggers</a></li>
+	</ul>
+	
+	<p>Triggers can be categorised in two groups:</p>
+	<ul>
+		<li><a href="#event">Event driven</a></li>
+		<li><a href="#time">Time scheduled</a></li>
+	</ul>
+	
+	<a name="event"></a>
+	<h3>Event driven</h3>
+	<blockquote>
+		If temperature is bellow 20&deg;C turn the heater on.<br/>
+		If temperature is over 25&deg;C switch the heater off.
+	</blockquote>
+	<blockquote>
+		If measured voltage is over 250V switch the relay off to protect my TV.
+	</blockquote>
+	<blockquote>
+		If connection to a node is lost send me an e-mail message.
+	</blockquote>
+	
+	<a name="time"></a>
+	<h3>Time scheduled</h3>
+	<blockquote>
+		Every minute display the temperature on MOD-LED8x8RGB.
+	</blockquote>
+	<blockquote>
+		Every day at 19:00 switch on lights.
+	</blockquote>
+	
+	<p>Continue with <a href="triggers.html">Triggers</a></p>
+	<p>Back to <a href="index.html">OlimexIoT Help</a></p>
+</body>
+</html>
