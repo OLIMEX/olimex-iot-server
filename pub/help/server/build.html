@@ -284,13 +284,13 @@ __EOF__
 <pre>
 apt-get install gdebi-core
 </pre>
-<p>Get olimex-iot_1.0.1-1_all.deb package</p>
+<p>Get olimex-iot_1.0.2-1_all.deb package</p>
 <pre>
-wget https://iot.olimex.com/install/olimex-iot_1.0.1-1_all.deb -P /var/cache/
+wget https://iot.olimex.com/install/olimex-iot_1.0.2-1_all.deb -P /var/cache/
 </pre>
 <p>Install olimex-iot</p>
 <pre>
-gdebi /var/cache/olimex-iot_1.0.1-1_all.deb
+gdebi /var/cache/olimex-iot_1.0.2-1_all.deb
 </pre>
 <p>
 <b>- Configuring olimex-iot -</b><br/>
@@ -316,8 +316,8 @@ sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 INSTALL_MOD_PATH=~/Oli
 <p>Pack rootfs to move it on HDD</p>
 <pre>
 cd ~/OlimexIoT/rootfs
-sudo tar czf rootfs.tgz *
-sudo wget https://iot.olimex.com/install/roofs2hdd -O root/rootfs2hdd
+sudo tar czf rootfs.tgz --numeric-owner *
+sudo wget https://iot.olimex.com/install/rootfs2hdd -O root/rootfs2hdd
 sudo chmod 744 root/rootfs2hdd
 cd ~/OlimexIoT
 </pre>
@@ -326,6 +326,9 @@ cd ~/OlimexIoT
 
 <a name="sd-card"></a>
 <h2>Prepare SD-card</h2>
+
+<p>As an alternative of making SD-card you can <a href="image.html">prepare image as file</a></p>
+
 <p class="red"><b>NOTE</b> You MUST replace <b>/dev/sdX</b> with your card reader device, e.g. /dev/sdb OR /dev/sdc</p>
 <p>Plug your SD-card into your computer</p>
 <p>To determine your card reader device use following command</p>

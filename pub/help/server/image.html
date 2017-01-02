@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+
+	<link rel="icon" sizes="16x16" href="../images/favicon.ico" />
+	<link rel="icon" sizes="48x48" href="../images/olimex.png" />
+	<link rel="apple-touch-icon" sizes="48x48" href="../images/olimex.png" />
+
+	<link href="../layout.css" rel="stylesheet" type="text/css" />
+	<link href="../style.css"  rel="stylesheet" type="text/css" />
+
+	<title>Olimex IoT - How to build image</title>
+</head>
+
+<body>
+<h1>Prepare image as file</h1>
+
+<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+
+<p>Create empty image file</p>
+<pre>
+sudo dd if=/dev/zero of=OlimexIoT.img bs=1K count=1800000
+</pre>
+
+<p>Create partition table</p>
+<pre>
+sudo parted -s OlimexIoT.img mktable msdos
+</pre>
+
+<p>Create boot partition</p>
+<pre>
+sudo parted -s -a optimal OlimexIoT.img mkpart primary ext4 1 16MiB
+</pre>
+
+<p>Create rootfs partition</p>
+<pre>
+sudo parted -s -a optimal OlimexIoT.img mkpart primary ext4 16MiB 100%
+</pre>
+
+<p>Setup loop device</p>
+<pre>
+sudo losetup --partscan --show --find OlimexIoT.img
+</pre>
+<p>As result command should display on which loop is i.e. /dev/loop0</p>
+
+<p>Make ext4 file systems</p>
+<p>First check version of e2fsprogs package</p>
+<pre>
+dpkg -s e2fsprogs|grep Version
+</pre>
+<p>If your e2fsprogs package is version 1.43 or greater</p>
+<pre>
+sudo mkfs.ext4 -F -O ^metadata_csum,^64bit /dev/loop0p1
+sudo mkfs.ext4 -F -O ^metadata_csum,^64bit /dev/loop0p2
+</pre>
+<p>OR<br/>
+If your e2fsprogs package is version 1.42 or less</p>
+<pre>
+sudo mkfs.ext4 -F /dev/loop0p1
+sudo mkfs.ext4 -F /dev/loop0p2
+</pre>
+
+<p>Install u-boot</p>
+<pre>
+sudo dd if=~/OlimexIoT/u-boot/u-boot-sunxi-with-spl.bin of=/dev/loop0 bs=1k seek=8
+</pre>
+
+<p>Mount partitions</p>
+<pre>
+sudo mount /dev/loop0p1 /mnt/boot
+sudo mount /dev/loop0p2 /mnt/sd
+</pre>
+
+<p>Install kernel</p>
+<pre>
+sudo cp ~/OlimexIoT/u-boot/boot*.scr /mnt/boot
+sudo cp ~/OlimexIoT/linux/arch/arm/boot/zImage /mnt/boot
+sudo cp ~/OlimexIoT/linux/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dtb /mnt/boot
+</pre>
+
+<p>Install rootfs</p>
+<pre>
+sudo cp -rvfp ~/OlimexIoT/rootfs/* /mnt/sd
+</pre>
+
+<p>Unmount partitions</p>
+<pre>
+sudo umount /dev/loop0p1
+sudo umount /dev/loop0p2
+</pre>
+
+<p>Detach loop device</p>
+<pre>
+sudo losetup -d /dev/loop0
+</pre>
+
+
+<p>Continue with <a href="image-burn.html">Burn image for OlimexIoT server</a></p>
+
+<p>Back to <a href="index.html">How to install OlimexIoT server</a></p>
+
+</body>

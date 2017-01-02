@@ -62,9 +62,9 @@
 						$dhcp.on(
 							'change.IoT',
 							function () {
-								$form.find('input[name=ip],input[name=mask]').prop('disabled', $dhcp.is(':checked'));
+								$form.find('input[name=ip],input[name=mask],input[name=gw]').prop('disabled', $dhcp.is(':checked'));
 								if ($dhcp.is(':checked')) {
-									$form.find('input[name=ip],input[name=mask]').attr('disabled', 'disabled');
+									$form.find('input[name=ip],input[name=mask],input[name=gw]').attr('disabled', 'disabled');
 								}
 							}
 						);

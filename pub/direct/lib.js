@@ -343,12 +343,33 @@
 })(jQuery);
 
 (function ($) {
+	var strINPUTS = [
+		'ssid', 
+		'host', 
+		'server', 
+		'hostname', 
+		'user', 
+		'password', 
+		'name', 
+		'address', 
+		'netmask', 
+		'gateway', 
+		'token'
+	];
+	
 	$.fn.serializeJSON = function() {
 		var json = {};
 		
 		this.children().each(
 			function (i, e) {
 				var $e = $(e);
+				var $name = $e.attr('name');
+				
+				if (typeof $name == 'undefined') {
+					$.extend(json, $e.serializeJSON());
+					return;
+				}
+				
 				if (
 					$e.is('.no-post') || 
 					$e.is(':button') || 
@@ -360,7 +381,7 @@
 				}
 				
 				if ($e.is(':file')) {
-					json[$e.attr('name')] = 'FILE-DATA:'+(typeof e.files != 'undefined' && e.files.length > 0 ? e.files[0].size : 0);
+					json[$name] = 'FILE-DATA:'+(typeof e.files != 'undefined' && e.files.length > 0 ? e.files[0].size : 0);
 					return json;
 				}
 				
@@ -368,11 +389,11 @@
 					$e.trigger('toJSON');
 					var val = $e.data('JSON') ? $e.data('JSON') : $e.val();
 					$e.data('JSON', null);
-					json[$e.attr('name')] = $e.is(':not(:checkbox)') || $e.is(':checked') ?
+					json[$name] = $e.is(':not(:checkbox)') || $e.is(':checked') ?
 						(val === null ?
 							null
 							:
-							(typeof val == 'string' && val.match(/^-?\d+$/) ?
+							(typeof val == 'string' && strINPUTS.indexOf($name.toLowerCase()) == -1 && val.match(/^-?\d+$/) ?
 								parseInt(val)
 								:
 								val
@@ -384,11 +405,7 @@
 					return json;
 				}
 				
-				if ($e.attr('name') != undefined) {
-					json[$e.attr('name')] = $e.serializeJSON();
-				} else {
-					$.extend(json, $e.serializeJSON());
-				}
+				json[$name] = $e.serializeJSON();
 			}
 		);
 		return json;
