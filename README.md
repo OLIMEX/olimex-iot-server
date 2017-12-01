@@ -3,7 +3,7 @@
 
 ## Technology
 
-**OlimexIoT** is based on exchanging asynchronous JSON Messages between [IoT Nodes](https://iot.olimex.com/help/glossary.html#node) and [IoT Server](https://iot.olimex.com/help/glossary.html#server) through WebSockets or HTTP POST requests.
+**OlimexIoT** is based on exchanging asynchronous JSON Messages between [IoT Nodes](http://iot.olimex.com/help/glossary.html#node) and [IoT Server](http://iot.olimex.com/help/glossary.html#server) through WebSockets or HTTP POST requests.
 
 **WebSockets** allows bi-directional communication between the node and the server and is easy (by design) to pass through NAT Firewalls and Proxy Servers.
 
@@ -18,7 +18,7 @@ Each **IoT Node** builds separate connection to **OlimexIoT Service**. Node's fi
 <table>
 	<tr>
 		<td colspan="2">
-		<img src="https://iot.olimex.com/help/images/OlimexIoT-01.jpg" />
+		<img src="http://iot.olimex.com/help/images/OlimexIoT-01.jpg" />
 		</td>
 	</tr>
 	<tr>
@@ -38,7 +38,7 @@ Each **IoT Node** builds separate connection to **OlimexIoT Service**. Node's fi
 				<li>Requires constant internet connection</li>
 				<li>
 					<b>Your private</b> data is on <b>our public</b> server&nbsp;- 
-					if you are paranoid <img src="https://iot.olimex.com/help/images/wink.png" />
+					if you are paranoid <img src="http://iot.olimex.com/help/images/wink.png" />
 				</li>
 			</ul>
 		</td>
@@ -46,7 +46,7 @@ Each **IoT Node** builds separate connection to **OlimexIoT Service**. Node's fi
 </table>
 
 
-See [How to use our free **OlimexIoT Service**](https://iot.olimex.com/help/service.html)
+See [How to use our free **OlimexIoT Service**](http://iot.olimex.com/help/service.html)
 
 ### Build your own **OlimexIoT Server**
 
@@ -85,7 +85,7 @@ Direct connection between **IoT Nodes** and **IoT Server** via existing wireless
 	</tr>
 	<tr>
 		<td colspan="2">
-		<img src="https://iot.olimex.com/help/images/OlimexIoT-02.jpg" />
+		<img src="http://iot.olimex.com/help/images/OlimexIoT-02.jpg" />
 		</td>
 	</tr>
 	<tr>
@@ -108,4 +108,4 @@ Direct connection between **IoT Nodes** and **IoT Server** via existing wireless
 	</tr>
 </table>
 
-See [Build your own **OlimexIoT Server**](https://iot.olimex.com/help/server/index.html)
+See [Build your own **OlimexIoT Server**](http://iot.olimex.com/help/server/index.html)
